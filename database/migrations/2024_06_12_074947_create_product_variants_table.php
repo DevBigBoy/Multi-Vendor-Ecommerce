@@ -14,7 +14,8 @@ return new class extends Migration
     Schema::create('product_variants', function (Blueprint $table) {
       $table->id();
       $table->unsignedBigInteger('product_id');
-
+      $table->string('name');
+      $table->boolean('status');
       $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
       $table->timestamps();
     });

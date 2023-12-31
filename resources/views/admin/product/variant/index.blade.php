@@ -1,6 +1,6 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Image Gallery')
+@section('title', 'Product Variant')
 
 @section('content')
     <section class="section">
@@ -14,17 +14,15 @@
         </div>
 
         <div class="section-body">
-            <div class="row">
-
-            </div>
 
             <div class="row">
                 <div class="col-12 col-md-12 col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>All Brands</h4>
+                            <h4>Product : {{ $product->name }}</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.brand.create') }}" class="btn btn-icon icon-left btn-primary">
+                                <a href="{{ route('admin.product_variant.create', ['product' => $product->id]) }}"
+                                    class="btn btn-icon icon-left btn-primary">
                                     <i class="far fa-edit"></i> Create New
                                 </a>
                             </div>
