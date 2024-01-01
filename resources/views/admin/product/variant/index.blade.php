@@ -40,4 +40,35 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+
+    <script>
+        $(document).ready(function() {
+            $('body').on('click', '.change-status', function() {
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.product_variant.changestatus') }}",
+                    method: "PUT",
+                    data: {
+                        isChecked: isChecked,
+                        id: id,
+                    },
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            toastr.success(response.message);
+                        } else if (response.status === 'error') {
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+
+                console.log(isChecked);
+            })
+        })
+    </script>
 @endpush
