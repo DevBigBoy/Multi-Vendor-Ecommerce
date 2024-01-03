@@ -49,7 +49,7 @@
                 </ul>
             </li>
 
-            <li class="dropdown {{ setActive(['admin.sliders.*']) }}">
+            <li class="dropdown {{ setActive(['admin.vendor_profile.*']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown">
                     <i class="fa fa-cube" aria-hidden="true"></i>
                     <span>Ecommerce</span>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\ProductVariantDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreProductVariantRequest;
+use App\Http\Requests\Backend\UpdateProductVariantRequest;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Auth\Events\Validated;
@@ -17,9 +18,9 @@ class ProductVariantController extends Controller
    */
   protected $model;
 
-  public function __construct()
+  public function __construct(ProductVariant $productVariant)
   {
-    $this->model = new ProductVariant;
+    $this->model = $productVariant;
   }
 
   public function index(Request $request, ProductVariantDataTable $datatable)
@@ -63,16 +64,24 @@ class ProductVariantController extends Controller
    */
   public function edit(string $id)
   {
-    $product = $this->model::findOrFail($id);
-    return view('admin.product.variant.edit', compact('product'));
+    $variant = $this->model::findOrFail($id);
+    return view('admin.product.variant.edit', compact('variant'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateProductVariantRequest $request, string $id)
   {
-    //
+    $variant = $this->model::findOrFail($id);
+
+    $data = $request->validated();
+
+    $variant->update($data);
+
+    toastr()->success('Updated Successfully!');
+
+    return redirect()->route('admin.product_variant.index', ['product' => $variant->product_id]);
   }
 
   /**

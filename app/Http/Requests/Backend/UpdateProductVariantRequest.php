@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSliderRequest extends FormRequest
+class UpdateProductVariantRequest extends FormRequest
 {
   /**
    * Determine if the user is authorized to make this request.
@@ -22,13 +22,8 @@ class UpdateSliderRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'banner' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
-      'type' => ['nullable', 'string', 'max:100'],
-      'title' => ['nullable', 'string', 'max:255'],
-      'starting_price' => ['nullable', 'string', 'max:3'],
-      'btn_url' => ['nullable', 'url'],
-      'serial' => ['nullable', 'integer'],
-      'status' => ['required', 'boolean'],
+      'name' => ['required', 'string', 'max:255'],
+      'status' => ['required']
     ];
   }
 }

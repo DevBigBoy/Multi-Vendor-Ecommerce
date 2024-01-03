@@ -70,7 +70,7 @@ class ProductVariantDataTable extends DataTable
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
-      ->orderBy(1)
+      ->orderBy(0)
       ->selectStyleSingle()
       ->buttons([
         Button::make('excel'),
@@ -95,6 +95,7 @@ class ProductVariantDataTable extends DataTable
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
+        ->width(400)
         ->addClass('text-center'),
     ];
   }
