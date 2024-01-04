@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Return_;
 
 class ProductVariantController extends Controller
 {
@@ -89,6 +90,16 @@ class ProductVariantController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $this->model::destroy($id);
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+  }
+
+  public function changeStatus(Request $request)
+  {
+    $variant = $this->model::findOrFail($request->id);
+    $variant->status = $request->isChecked == 'true' ? 1 : 0;
+    $variant->save();
+
+    return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);
   }
 }
