@@ -23,7 +23,7 @@
                         <div class="card-header">
                             <h4>Product : {{ $product->name }} </h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.product_variant_items.create') }}"
+                                <a href="{{ route('admin.product_variant_items.create', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
                                     class="btn btn-icon icon-left btn-primary">
                                     <i class="far fa-edit"></i> Create New
                                 </a>
