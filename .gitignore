@@ -3,6 +3,9 @@
 /public/build
 /public/hot
 /public/storage
+/public/backend/assets/modules
+/public/backend/assets/img
+/public/backend/assets/js
 /storage/*.key
 /vendor
 .env
