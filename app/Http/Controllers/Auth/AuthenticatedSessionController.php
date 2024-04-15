@@ -12,42 +12,42 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    public function create(): View
-    {
-        return view('auth.login');
+  /**
+   * Display the login view.
+   */
+  public function create(): View
+  {
+    return view('auth.login');
+  }
+
+  /**
+   * Handle an incoming authentication request.
+   */
+  public function store(LoginRequest $request): RedirectResponse
+  {
+    $request->authenticate();
+
+    $request->session()->regenerate();
+
+    if ($request->user()->role === 'admin') {
+      return redirect()->intended('/admin/dashboard');
+    } elseif ($request->user()->role === 'vendor') {
+      return redirect()->intended('/vendor/dashboard');
     }
+    return redirect()->intended(RouteServiceProvider::HOME);
+  }
 
-    /**
-     * Handle an incoming authentication request.
-     */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+  /**
+   * Destroy an authenticated session.
+   */
+  public function destroy(Request $request): RedirectResponse
+  {
+    Auth::guard('web')->logout();
 
-        $request->session()->regenerate();
+    $request->session()->invalidate();
 
-        if ($request->user()->role === 'admin') {
-            return redirect()->intended('/admin/dashboard');
-        } elseif ($request->user()->role === 'vendor') {
-            return redirect()->intended('/vendor/dashboard');
-        }
-        return redirect()->intended(RouteServiceProvider::HOME);
-    }
+    $request->session()->regenerateToken();
 
-    /**
-     * Destroy an authenticated session.
-     */
-    public function destroy(Request $request): RedirectResponse
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-        return redirect('/');
-    }
+    return redirect('/');
+  }
 }
