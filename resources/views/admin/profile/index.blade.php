@@ -21,6 +21,9 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <x-input-error :messages="$errors->get('image')" class="mt-2 alert alert-danger" />
+                                </div>
+                                <div class="row">
                                     <div class="form-group col-md-6 col-12">
                                         <div class="">
                                             <img src="{{ asset(Auth::user()->image) }}" alt="" width="150px"
@@ -61,6 +64,52 @@
                             </div>
                             <div class="card-footer text-right">
                                 <button class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12 col-lg-7">
+                    <div class="card shadow p-3 mb-5 bg-white rounded">
+                        <form method="post" action="{{ route('admin.password.update') }}" class="needs-validation">
+                            @csrf
+                            @method('put')
+                            <div class="card-header">
+                                <h4>Update Password</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-12">
+                                        <label for="update_password_current_password">Current Password</label>
+                                        <input id="update_password_current_password" name="current_password" type="password"
+                                            class="form-control">
+                                        <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2 alert alert-danger" />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-12">
+                                        <label for="update_password_password">New Password</label>
+                                        <input id="update_password_password" name="password" type="password"
+                                            class="form-control">
+                                        <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2 alert alert-danger" />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="form-group col-md-6 col-12">
+                                        <label for="update_password_password_confirmation">Confirm Password</label>
+                                        <input id="update_password_password_confirmation" name="password_confirmation"
+                                            type="password" class="form-control">
+                                        <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2 alert alert-danger" />
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-footer text-right">
+                                <button class="btn btn-primary">Save</button>
+                                @if (session('status') === 'password-updated')
+                                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                                        class="text-sm text-gray-600 dark:text-gray-400">{{ __('Saved.') }}</p>
+                                @endif
                             </div>
                         </form>
                     </div>

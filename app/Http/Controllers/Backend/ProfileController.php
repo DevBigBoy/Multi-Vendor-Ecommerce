@@ -7,6 +7,8 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\Rules\Password;
 
 class ProfileController extends Controller
 {
@@ -47,8 +49,24 @@ class ProfileController extends Controller
     $user->email = $request->email;
     $user->phone = empty($request->phone) ? $user->phone : $request->phone;
 
-    $user->save();
-
+    $request->user()->save();
     return redirect()->back();
+  }
+
+  /**
+   * Update the user's password.
+   */
+  public function updatePassword(Request $request): RedirectResponse
+  {
+    $validated = $request->validateWithBag('updatePassword', [
+      'current_password' => ['required', 'current_password'],
+      'password' => ['required', Password::defaults(), 'confirmed'],
+    ]);
+
+    $request->user()->update([
+      'password' => bcrypt($validated['password']),
+    ]);
+
+    return back()->with('status', 'password-updated');
   }
 }

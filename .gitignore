@@ -7,7 +7,6 @@
 /public/backend/assets/img/news
 /public/backend/assets/img/products
 /public/backend/assets/img/unsplash
-/public/backend/assets/js
 /storage/*.key
 /vendor
 .env
