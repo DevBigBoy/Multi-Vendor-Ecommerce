@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
 {
@@ -24,7 +25,22 @@ class ProfileController extends Controller
       'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
       'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
       'phone' => ['nullable', 'max:100'],
+      'image' => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
     ]);
+
+    if ($request->hasFile('image')) {
+      if (File::exists(public_path($user->image))) {
+        File::delete(public_path($user->image));
+      }
+
+      $image = $request->image;
+      $imageName = rand() . '_' . $image->getClientOriginalName();
+      $image->move(public_path('uploads/admins/'), $imageName);
+
+      $path = "/uploads/admins/" . $imageName;
+
+      $user->image = $path;
+    }
 
     $user->name = $request->name;
     $user->username = $request->username;
@@ -33,6 +49,6 @@ class ProfileController extends Controller
 
     $user->save();
 
-    return response()->json(['message' => 'User updated successfully'], 200);
+    return redirect()->back();
   }
 }

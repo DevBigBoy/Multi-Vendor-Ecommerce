@@ -14,7 +14,7 @@
                 <div class="col-12 col-md-12 col-lg-7">
                     <div class="card shadow p-3 mb-5 bg-white rounded">
                         <form method="post" action="{{ route('admin.profile.update') }}" class="needs-validation"
-                            novalidate="">
+                            novalidate="" enctype="multipart/form-data">
                             @csrf
                             <div class="card-header">
                                 <h4>Edit Profile</h4>
@@ -22,25 +22,37 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-6 col-12">
+                                        <div class="">
+                                            <img src="{{ asset(Auth::user()->image) }}" alt="" width="150px"
+                                                height="150px">
+                                        </div>
+                                        <label>image</label>
+                                        <input type="file" class="form-control" name="image">
+                                    </div>
+                                </div>
+                                <div class="row">
+
+
+                                    <div class="form-group col-md-6 col-12">
                                         <label>Name</label>
                                         <input type="text" class="form-control" value="{{ Auth()->user()->name }}"
-                                            name="name" required>
+                                            name="name">
                                     </div>
 
                                     <div class="form-group col-md-6 col-12">
                                         <label>Username</label>
                                         <input type="text" class="form-control" value="{{ Auth()->user()->username }}"
-                                            name="username" required="">
+                                            name="username">
                                     </div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="form-group col-md-7 col-12">
+                                    <div class="form-group col-md-6 col-12">
                                         <label>Email</label>
                                         <input type="email" class="form-control" value="{{ Auth()->user()->email }}"
-                                            name="email" required="">
+                                            name="email">
                                     </div>
-                                    <div class="form-group col-md-5 col-12">
+                                    <div class="form-group col-md-6 col-12">
                                         <label>Phone</label>
                                         <input type="tel" class="form-control" name="phone"
                                             value="{{ Auth()->user()->phone }}">
