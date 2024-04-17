@@ -17,7 +17,7 @@ class ProfileController extends Controller
     return view('admin.profile.index');
   }
 
-  public function updateProfile(Request $request)
+  public function updateProfile(Request $request): RedirectResponse
   {
     // Retrieve the existing user from the database
     $user = Auth::user();
@@ -50,7 +50,9 @@ class ProfileController extends Controller
     $user->phone = empty($request->phone) ? $user->phone : $request->phone;
 
     $request->user()->save();
-    return redirect()->back();
+
+    toastr()->success('Profile updated successfully!');
+    return back();
   }
 
   /**
@@ -67,6 +69,7 @@ class ProfileController extends Controller
       'password' => bcrypt($validated['password']),
     ]);
 
-    return back()->with('status', 'password-updated');
+    toastr()->success('Password updated successfully!');
+    return back();
   }
 }
