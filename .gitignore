@@ -5,7 +5,6 @@
 /public/storage
 /public/backend/assets/modules
 /public/frontend/images
-/public/frontend/js
 /public/backend/assets/img/products
 /storage/*.key
 /vendor
