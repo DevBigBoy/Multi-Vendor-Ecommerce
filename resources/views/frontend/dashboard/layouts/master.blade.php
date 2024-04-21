@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/ranger_style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.classycountdown.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/venobox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}">
 
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}" />
@@ -32,7 +33,7 @@
     <!--============================= DASHBOARD MENU START ==============================-->
     <div class="wsus__dashboard_menu">
         <div class="wsusd__dashboard_user">
-            <img src="{{ !empty(Auth()->user->image) ? asset(Auth()->user->image) : asset('frontend/images/dashboard_user.jpg') }}"
+            <img src="{{ !empty(Auth()->user()->image) ? asset(Auth()->user()->image) : asset('frontend/images/dashboard_user.jpg') }}"
                 alt="img" class="img-fluid">
             <p>{{ Auth()->user()->name }}</p>
         </div>
@@ -83,9 +84,18 @@
     <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
     <!--classycountdown js-->
     <script src="{{ asset('frontend/js/jquery.classycountdown.js') }}"></script>
-
+    {{-- ToastrJs --}}
+    <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+    <script>
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>

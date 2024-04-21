@@ -15,47 +15,59 @@
                             <div class="wsus__dash_pro_area">
                                 <h4>basic information</h4>
 
-                                <div class="col-md-12">
-                                    <!-- image -->
-                                    <div class="col-md-2 mb-5">
-                                        <div class="wsus__dash_pro_img">
-                                            <img src="{{ !empty(Auth()->user->image) ? asset(Auth()->user->image) : asset('frontend/images/ts-2.jpg') }}"
-                                                alt="img" class="img-fluid w-100">
-                                            <input type="file">
+                                <form action="{{ route('user.profile.update') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="col-md-12">
+                                        <!-- image -->
+                                        <div class="col-md-2 mb-5">
+                                            <div class="wsus__dash_pro_img">
+                                                <img src="{{ !empty(Auth()->user()->image) ? asset(Auth()->user()->image) : asset('frontend/images/ts-2.jpg') }}"
+                                                    alt="img" class="img-fluid w-100">
+                                                <input type="file" class="form-control" name="image">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <!-- Name -->
+                                            <div class="col-xl-6 col-md-4">
+                                                <div class="wsus__dash_pro_single">
+                                                    <i class="fas fa-user-tie"></i>
+                                                    <input type="text" class="form-control"
+                                                        value="{{ Auth()->user()->name }}" name="name"
+                                                        placeholder="Name">
+                                                </div>
+                                            </div>
+
+                                            <!-- Phone -->
+                                            <div class="col-xl-6 col-md-4">
+                                                <div class="wsus__dash_pro_single">
+                                                    <i class="far fa-phone-alt"></i>
+                                                    <input type="tel" class="form-control" name="phone"
+                                                        value="{{ Auth()->user()->phone }}" placeholder="Phone">
+                                                </div>
+                                            </div>
+
+                                            <!-- Email -->
+                                            <div class="col-xl-6 col-md-4">
+                                                <div class="wsus__dash_pro_single">
+                                                    <i class="fal fa-envelope-open"></i>
+                                                    <input type="email" class="form-control"
+                                                        value="{{ Auth()->user()->email }}" name="email"
+                                                        placeholder="Email">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <!-- Name -->
-                                        <div class="col-xl-6 col-md-4">
-                                            <div class="wsus__dash_pro_single">
-                                                <i class="fas fa-user-tie"></i>
-                                                <input type="text" placeholder="Name">
-                                            </div>
-                                        </div>
-
-                                        <!-- Phone -->
-                                        <div class="col-xl-6 col-md-4">
-                                            <div class="wsus__dash_pro_single">
-                                                <i class="far fa-phone-alt"></i>
-                                                <input type="text" placeholder="Phone">
-                                            </div>
-                                        </div>
-
-                                        <!-- Email -->
-                                        <div class="col-xl-6 col-md-4">
-                                            <div class="wsus__dash_pro_single">
-                                                <i class="fal fa-envelope-open"></i>
-                                                <input type="email" placeholder="Email">
-                                            </div>
-                                        </div>
+                                    <div class="col-xl-12">
+                                        <button class="common_btn mb-4 mt-2" type="submit">Save Changes</button>
                                     </div>
-                                </div>
+                                </form>
 
 
-                                <div class="col-xl-12">
-                                    <button class="common_btn mb-4 mt-2" type="submit">upload</button>
-                                </div>
+
 
                                 <div class="wsus__dash_pass_change mt-2">
                                     <div class="row">
