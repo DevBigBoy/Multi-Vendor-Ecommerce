@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rules\Password;
 
 class UserProfileController extends Controller
 {
@@ -53,5 +54,16 @@ class UserProfileController extends Controller
 
   public function updatePassword(Request $request)
   {
+    $validated = $request->validate([
+      'current_password' => ['required', 'current_password'],
+      'password' => ['required', Password::defaults(), 'confirmed'],
+    ]);
+
+    $request->user()->update([
+      'password' => bcrypt($validated['password']),
+    ]);
+
+    toastr()->success('Password updated successfully!');
+    return back();
   }
 }
