@@ -3,8 +3,9 @@
         <i class="far fa-bars dash_bar"></i>
         <i class="far fa-times dash_close"></i>
     </span>
-    <a href="{{ route('user.dashboard') }}" class="dash_logo"><img src="{{ asset('frontend/images/logo.png') }}"
-            alt="logo" class="img-fluid" /></a>
+    <a href="{{ route('user.dashboard') }}" class="dash_logo">
+        <img src="{{ asset('frontend/images/logo.png') }}" alt="logo" class="img-fluid" />
+    </a>
     <ul class="dashboard_link">
         <li>
             <a class="active" href="dsahboard.html"><i class="fas fa-tachometer"></i>Dashboard</a>
@@ -22,7 +23,7 @@
             <a href="dsahboard_wishlist.html"><i class="far fa-heart"></i> Wishlist</a>
         </li>
         <li>
-            <a href="dsahboard_profile.html"><i class="far fa-user"></i> My Profile</a>
+            <a href="{{ route('vendor.profile') }}"><i class="far fa-user"></i> My Profile</a>
         </li>
         <li>
             <a href="dsahboard_address.html"><i class="fal fa-gift-card"></i> Addresses</a>
