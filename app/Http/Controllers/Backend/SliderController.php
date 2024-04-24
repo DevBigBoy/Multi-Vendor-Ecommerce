@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderRequest;
 use App\Models\Slider;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
+  use ImageUploadTrait;
   /**
    * Display a listing of the resource.
    */
@@ -32,9 +34,10 @@ class SliderController extends Controller
   public function store(CreateSliderRequest $request): RedirectResponse
   {
     $slider = new Slider();
+    /** handle file upload */
+    $imagePath =  $this->uploadImage($request, 'banner', 'uploads/sliders/');
 
-    $slider->banner = $request->banner;
-
+    $slider->banner = $imagePath;
     $slider->type = $request->type;
     $slider->title = $request->title;
     $slider->starting_price = $request->starting_price;
@@ -61,7 +64,8 @@ class SliderController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $slider = Slider::findOrFail($id);
+    return view('admin.slider.edite')->with('slider');
   }
 
   /**
