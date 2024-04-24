@@ -84,15 +84,13 @@
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom.js') }}"></script>
 
-    {{-- <script>
+    <script>
         @if ($errors->any())
             @foreach ($errors->all() as $error)
-                @php
-                    toastr()->error($error);
-                @endphp
+                toastr.error("{{ $error }}")
             @endforeach
         @endif
-    </script> --}}
+    </script>
 </body>
 
 </html>

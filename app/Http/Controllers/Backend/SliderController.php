@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\CreateSliderRequest;
+use App\Models\Slider;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class SliderController extends Controller
@@ -26,9 +29,23 @@ class SliderController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(CreateSliderRequest $request): RedirectResponse
   {
-    //
+    $slider = new Slider();
+
+    $slider->banner = $request->banner;
+
+    $slider->type = $request->type;
+    $slider->title = $request->title;
+    $slider->starting_price = $request->starting_price;
+    $slider->btn_url = $request->btn_url;
+    $slider->serial = $request->serial;
+    $slider->status = $request->status;
+
+    $slider->save();
+
+    toastr()->success('Created Successfully!');
+    return back();
   }
 
   /**

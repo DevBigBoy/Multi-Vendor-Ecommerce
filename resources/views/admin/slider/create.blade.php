@@ -23,40 +23,40 @@
                                 @csrf
                                 <div class="form-group">
                                     <label>Banner</label>
-                                    <input type="file" class="form-control">
+                                    <input type="file" class="form-control" name="banner">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Type</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="type" value="{{ old('type') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Title</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="title" value="{{ old('title') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Starting Price</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="starting_price"
+                                        value="{{ old('starting_price') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Button URL</label>
-                                    <input type="text" class="form-control">
+                                    <input type="url" class="form-control" name="btn_url" value="{{ old('btn_url') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Serial</label>
-                                    <input type="text" class="form-control">
+                                    <input type="text" class="form-control" name="serial" value="{{ old('serial') }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
-                                    <select id="status" class="form-control">
-                                        <option selected="">active</option>
-                                        <option>inactive</option>
-
+                                    <select id="status" class="form-control" name="status">
+                                        <option value="1" selected="">Active</option>
+                                        <option value="0">Inactive</option>
                                     </select>
                                 </div>
 
