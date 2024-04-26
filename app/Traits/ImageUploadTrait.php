@@ -35,8 +35,6 @@ trait ImageUploadTrait
       $image->move(public_path($path), $imageName);
 
       return $path . $imageName;
-    } else {
-      return $oldpath;
     }
   }
 }
