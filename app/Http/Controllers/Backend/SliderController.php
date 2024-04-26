@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderRequest;
+use App\Http\Requests\Backend\UpdateSliderRequest;
 use App\Models\Slider;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\RedirectResponse;
@@ -66,15 +67,29 @@ class SliderController extends Controller
   public function edit(string $id)
   {
     $slider = Slider::findOrFail($id);
-    return view('admin.slider.edite')->with('slider');
+    return view('admin.slider.edite', ['slider' => $slider]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateSliderRequest $request, string $id): RedirectResponse
   {
-    //
+    $slider = Slider::findOrFail($id);
+
+    $imagePath =  $this->updateImage($request, 'banner', 'uploads/sliders/', $slider->banner);
+
+    $slider->banner = $imagePath;
+    $slider->type = $request->type;
+    $slider->title = $request->title;
+    $slider->starting_price = $request->starting_price;
+    $slider->btn_url = $request->btn_url;
+    $slider->serial = $request->serial;
+    $slider->status = $request->status;
+    $slider->save();
+
+    toastr()->success('Updated Successfully!');
+    return redirect()->route('admin.slider.index');
   }
 
   /**
