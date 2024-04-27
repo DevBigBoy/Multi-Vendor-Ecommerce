@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>General Dashboard &mdash; Stisla</title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap/css/bootstrap.min.css') }}">
@@ -81,6 +82,8 @@
     <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
     <script src="//cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('backend/assets/js/page/index-0.js') }}"></script>
@@ -95,6 +98,52 @@
                 toastr.error("{{ $error }}")
             @endforeach
         @endif
+    </script>
+
+
+    <!-- Dynamic Delete alart -->
+    <script>
+        // Set csrf at ajax header
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
+            $('body').on('click', '.delete-item', function(e) {
+                e.preventDefault()
+                let url = $(this).attr('href');
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            success: function(response) {
+                                if (response.status === 'success') {
+                                    toastr.success(response.message);
+                                    $('#slider-table').DataTable().draw();
+                                } else if (response.status === 'error') {
+                                    toastr.error(response.message);
+                                }
+                            },
+
+                            error: function(error) {
+                                console.error(error);
+                            }
+                        })
+                    }
+                });
+            })
+        });
     </script>
     @stack('scripts')
 </body>

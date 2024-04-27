@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderRequest;
 use App\Http\Requests\Backend\UpdateSliderRequest;
 use App\Models\Slider;
+use App\Traits\ImageDeleteTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 class SliderController extends Controller
 {
   use ImageUploadTrait;
+  use ImageDeleteTrait;
   /**
    * Display a listing of the resource.
    */
@@ -97,6 +99,10 @@ class SliderController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $slider = Slider::findOrFail($id);
+    $this->deleteImage($slider->banner);
+    $slider->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 }
