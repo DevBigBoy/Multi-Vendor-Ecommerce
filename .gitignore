@@ -3,7 +3,7 @@
 /public/build
 /public/hot
 /public/storage
-/public/backend/assets/modules
+/public/backend/assets/modules/notNew
 /storage/*.key
 /vendor
 .env
