@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\DataTables\CategoryDataTable;
-use App\Http\Controllers\Controller;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\DataTables\CategoryDataTable;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Backend\CreateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -27,9 +31,19 @@ class CategoryController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(CreateCategoryRequest $request): RedirectResponse
   {
-    dd($request->all);
+    $category = new Category();
+
+    $category->icon = $request->icon;
+    $category->name = $request->name;
+    $category->slug = Str::slug($request->name);
+    $category->status = $request->status;
+
+    $category->save();
+
+    toastr()->success('Category Has been created Successfully!');
+    return redirect()->route('admin.category.index');
   }
 
   /**
