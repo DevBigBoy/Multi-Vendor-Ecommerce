@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\DataTables\CategoryDataTable;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Backend\CreateCategoryRequest;
+use App\Http\Requests\Backend\UpdateCategoryRequest;
+use Illuminate\Contracts\View\View;
 
 class CategoryController extends Controller
 {
@@ -59,15 +61,23 @@ class CategoryController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $category = Category::findOrFail($id);
+    return View('admin.category.edite', compact('category'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateCategoryRequest $request, string $id)
   {
-    //
+    $category = Category::findOrFail($id);
+    $category->icon = $request->icon;
+    $category->name = $request->name;
+    $category->status = $request->status;
+    $category->save();
+
+    toastr()->success('Updated Sucessfully');
+    return redirect()->route('admin.category.index');
   }
 
   /**
