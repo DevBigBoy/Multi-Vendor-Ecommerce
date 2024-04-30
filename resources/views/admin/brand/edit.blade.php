@@ -17,12 +17,13 @@
                 <div class="col-10">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Edit Brand</h4>
+                            <h4>Update Brand</h4>
                         </div>
                         <div class="card-body col-9">
                             <form action="{{ route('admin.brand.update', $brand->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
 
                                 <div class="form-group row mb-4">
                                     <div class="col-sm-12 col-md-8">
@@ -41,7 +42,6 @@
                                 <div class="form-group mb-4">
                                     <label>Is Featured</label>
                                     <select class="form-control selectric" name="is_featured">
-                                        <option value="">Select</option>
                                         <option @selected($brand->is_featured == 1) value="1">Yes</option>
                                         <option @selected($brand->is_featured == 0) value="0">No</option>
                                     </select>
@@ -50,13 +50,12 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" class="form-control selectric" name="status">
-                                        <option value="">Select</option>
                                         <option @selected($brand->status == 1) value="1">Active</option>
                                         <option @selected($brand->status == 0) value="0">Inactive</option>
                                     </select>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
                         </div>
                     </div>
