@@ -62,7 +62,9 @@ class SubCategoryController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $subcategory = SubCategory::fintOrFail($id);
+
+    return view('admin.sub-category.edite', ['subcategory' => $subcategory]);
   }
 
   /**

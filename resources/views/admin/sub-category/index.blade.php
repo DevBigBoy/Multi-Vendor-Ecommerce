@@ -36,4 +36,10 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+    $(document).ready({
+    $(body).on('click', '', function(){
+
+    })
+    })
 @endpush
