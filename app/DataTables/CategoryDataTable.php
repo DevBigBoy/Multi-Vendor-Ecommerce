@@ -33,10 +33,19 @@ class CategoryDataTable extends DataTable
       })
       ->addColumn('status', function ($query) {
         if ($query->status == 1) {
-          return "<div class='badge badge-success'>Active</div>";
+          $button = '
+            <label class="custom-switch mt-2">
+              <input type="checkbox" checked name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+            </label>';
         } elseif ($query->status == 0) {
-          return "<div class='badge badge-danger'>Not Active</div>";
+          $button = '
+            <label class="custom-switch mt-2">
+              <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
+              <span class="custom-switch-indicator"></span>
+            </label>';
         }
+        return $button;
       })
       ->rawColumns(['action', 'icon', 'status'])
       ->setRowId('id');
