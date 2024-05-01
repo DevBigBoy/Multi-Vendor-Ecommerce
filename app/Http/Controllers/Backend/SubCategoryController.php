@@ -4,7 +4,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\backend\CreateSubCategoryRequest;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 
 class SubCategoryController extends Controller
 {
@@ -22,15 +27,26 @@ class SubCategoryController extends Controller
    */
   public function create()
   {
-    return view('admin.sub-category.create');
+    $catgories = Category::all();
+    return view('admin.sub-category.create', ['catgories' => $catgories]);
   }
 
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(CreateSubCategoryRequest $request)
   {
-    //
+    $validated = $request->validated();
+    $subcategory = new SubCategory();
+    $subcategory->category_id = $validated['category'];
+    $subcategory->name = $validated['name'];
+    $subcategory->slug = Str::slug($validated['name']);
+    $subcategory->status = $validated['status'];
+    $subcategory->save();
+
+    toastr()->success('Sub-Category Created Successfully!');
+
+    return redirect()->route('admin.sub-category.index');
   }
 
   /**

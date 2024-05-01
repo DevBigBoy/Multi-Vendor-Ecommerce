@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Categories</h1>
+            <h1>Sub-Categories</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="{{ route('admin.sub-category.index') }}">Sub-Categories</a></div>
@@ -24,11 +24,13 @@
                                 @csrf
 
                                 <div class="form-group">
-                                    <label>Icon</label>
-                                    <div class="">
-                                        <button data-selected-class="btn-danger" data-unselected-class="btn-info"
-                                            class="btn btn-primary" role="iconpicker" name="icon"></button>
-                                    </div>
+                                    <label for="category">Category</label>
+                                    <select id="category" class="form-control" name="category">
+                                        <option value="">Select</option>
+                                        @foreach ($catgories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-group">
