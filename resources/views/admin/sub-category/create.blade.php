@@ -20,7 +20,7 @@
                             <h4>Create Sub-Category</h4>
                         </div>
                         <div class="card-body col-9">
-                            <form action="{{ route('admin.sub-category.store') }}" method="POST">
+                            <form action="{{ route('admin.subcategory.store') }}" method="POST">
                                 @csrf
 
                                 <div class="form-group">

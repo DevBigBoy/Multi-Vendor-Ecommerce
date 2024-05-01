@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\backend\CreateSubCategoryRequest;
+use App\Http\Requests\Backend\UpdateSubCategoryRequest;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -18,7 +19,6 @@ class SubCategoryController extends Controller
    */
   public function index(SubCategoryDataTable $dataTable)
   {
-
     return $dataTable->render('admin.sub-category.index');
   }
 
@@ -44,9 +44,9 @@ class SubCategoryController extends Controller
     $subcategory->status = $validated['status'];
     $subcategory->save();
 
-    toastr()->success('Sub-Category Created Successfully!');
+    toastr()->success('Sub Category Created Successfully!');
 
-    return redirect()->route('admin.sub-category.index');
+    return redirect()->route('admin.subcategory.index');
   }
 
   /**
@@ -62,17 +62,24 @@ class SubCategoryController extends Controller
    */
   public function edit(string $id)
   {
-    $subcategory = SubCategory::fintOrFail($id);
-
-    return view('admin.sub-category.edite', ['subcategory' => $subcategory]);
+    $catgories = Category::all();
+    $subCategory = SubCategory::findOrFail($id);
+    return view('admin.sub-category.edite', ['subcategory' => $subCategory, 'catgories' => $catgories]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateSubCategoryRequest $request, string $id)
   {
-    //
+    $subCategory = SubCategory::findOrFail($id);
+    $subCategory->name = $request->name;
+    $subCategory->category_id = $request->category;
+    $subCategory->status = $request->status;
+    $subCategory->save();
+    toastr()->success('Sub Category updated Successfully!');
+
+    return redirect()->route('admin.subcategory.index');
   }
 
   /**
