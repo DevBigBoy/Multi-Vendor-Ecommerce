@@ -78,7 +78,6 @@ class SubCategoryController extends Controller
     $subCategory->status = $request->status;
     $subCategory->save();
     toastr()->success('Sub Category updated Successfully!');
-
     return redirect()->route('admin.subcategory.index');
   }
 
@@ -87,6 +86,9 @@ class SubCategoryController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $subCategory = SubCategory::findOrFail($id);
+    $subCategory->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 }

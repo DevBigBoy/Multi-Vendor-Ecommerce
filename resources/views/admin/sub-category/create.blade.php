@@ -6,7 +6,7 @@
             <h1>Sub-Categories</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.sub-category.index') }}">Sub-Categories</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.subcategory.index') }}">Sub-Categories</a></div>
                 <div class="breadcrumb-item">All</div>
             </div>
         </div>
