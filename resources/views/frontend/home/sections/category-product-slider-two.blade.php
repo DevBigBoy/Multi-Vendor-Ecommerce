@@ -15,8 +15,10 @@
                     <span class="wsus__new">New</span>
                     <span class="wsus__minus">-20%</span>
                     <a class="wsus__pro_link" href="product_details.html">
-                        <img src="images/pro8.jpg" alt="product" class="img-fluid w-100 img_1" />
-                        <img src="images/pro8_8.jpg" alt="product" class="img-fluid w-100 img_2" />
+                        <img src="{{ asset('frontend/images/pro8.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_1" />
+                        <img src="{{ asset('frontend/images/pro8_8.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_2" />
                     </a>
                     <ul class="wsus__single_pro_icon">
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -44,8 +46,10 @@
                 <div class="wsus__product_item">
                     <span class="wsus__minus">-20%</span>
                     <a class="wsus__pro_link" href="product_details.html">
-                        <img src="images/kids_1.jpg" alt="product" class="img-fluid w-100 img_1" />
-                        <img src="images/kids_2.jpg" alt="product" class="img-fluid w-100 img_2" />
+                        <img src="{{ asset('frontend/images/kids_1.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_1" />
+                        <img src="{{ asset('frontend/images/kids_2.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_2" />
                     </a>
                     <ul class="wsus__single_pro_icon">
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -73,8 +77,10 @@
                 <div class="wsus__product_item">
                     <span class="wsus__new">New</span>
                     <a class="wsus__pro_link" href="product_details.html">
-                        <img src="images/blazer_1.jpg" alt="product" class="img-fluid w-100 img_1" />
-                        <img src="images/blazer_2.jpg" alt="product" class="img-fluid w-100 img_2" />
+                        <img src="{{ asset('frontend/images/blazer_1.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_1" />
+                        <img src="{{ asset('frontend/images/blazer_2.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_2" />
                     </a>
                     <ul class="wsus__single_pro_icon">
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -102,8 +108,10 @@
                 <div class="wsus__product_item">
                     <span class="wsus__minus">-20%</span>
                     <a class="wsus__pro_link" href="product_details.html">
-                        <img src="images/wemans_2.jpg" alt="product" class="img-fluid w-100 img_1" />
-                        <img src="images/wemans_1.jpg" alt="product" class="img-fluid w-100 img_2" />
+                        <img src="{{ asset('frontend/images/wemans_2.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_1" />
+                        <img src="{{ asset('frontend/images/wemans_1.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_2" />
                     </a>
                     <ul class="wsus__single_pro_icon">
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -132,8 +140,10 @@
                     <span class="wsus__new">New</span>
 
                     <a class="wsus__pro_link" href="product_details.html">
-                        <img src="images/wemans_2.jpg" alt="product" class="img-fluid w-100 img_1" />
-                        <img src="images/wemans_1.jpg" alt="product" class="img-fluid w-100 img_2" />
+                        <img src="{{ asset('frontend/images/wemans_2.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_1" />
+                        <img src="{{ asset('frontend/images/wemans_1.jpg') }}" alt="product"
+                            class="img-fluid w-100 img_2" />
                     </a>
                     <ul class="wsus__single_pro_icon">
                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
