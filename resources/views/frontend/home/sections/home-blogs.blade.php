@@ -13,7 +13,7 @@
               <div class="col-xl-3">
                   <div class="wsus__single_blog wsus__single_blog_2">
                       <a class="wsus__blog_img" href="#">
-                          <img src="images/blog_1.jpg" alt="blog" class="img-fluid w-100">
+                          <img src="{{ asset('frontend/images/blog_1.jpg') }}" alt="blog" class="img-fluid w-100">
                       </a>
                       <div class="wsus__blog_text">
                           <a class="blog_top red" href="#">women's</a>
@@ -27,7 +27,7 @@
               <div class="col-xl-3">
                   <div class="wsus__single_blog wsus__single_blog_2">
                       <a class="wsus__blog_img" href="#">
-                          <img src="images/blog_2.jpg" alt="blog" class="img-fluid w-100">
+                          <img src="{{ asset('frontend/images/blog_2.jpg') }}" alt="blog" class="img-fluid w-100">
                       </a>
                       <div class="wsus__blog_text">
                           <a class="blog_top blue" href="#">lifestyle</a>
@@ -41,7 +41,7 @@
               <div class="col-xl-3">
                   <div class="wsus__single_blog wsus__single_blog_2">
                       <a class="wsus__blog_img" href="#">
-                          <img src="images/blog_3.jpg" alt="blog" class="img-fluid w-100">
+                          <img src="{{ asset('frontend/images/blog_3.jpg') }}" alt="blog" class="img-fluid w-100">
                       </a>
                       <div class="wsus__blog_text">
                           <a class="blog_top orange" href="#">lifestyle</a>
@@ -55,7 +55,7 @@
               <div class="col-xl-3">
                   <div class="wsus__single_blog wsus__single_blog_2">
                       <a class="wsus__blog_img" href="#">
-                          <img src="images/blog_4.jpg" alt="blog" class="img-fluid w-100">
+                          <img src="{{ asset('frontend/images/blog_4.jpg') }}" alt="blog" class="img-fluid w-100">
                       </a>
                       <div class="wsus__blog_text">
                           <a class="blog_top orange" href="#">fashion</a>
@@ -69,7 +69,7 @@
               <div class="col-xl-3">
                   <div class="wsus__single_blog wsus__single_blog_2">
                       <a class="wsus__blog_img" href="#">
-                          <img src="images/blog_5.jpg" alt="blog" class="img-fluid w-100">
+                          <img src="{{ asset('frontend/images/blog_5.jpg') }}" alt="blog" class="img-fluid w-100">
                       </a>
                       <div class="wsus__blog_text">
                           <a class="blog_top red" href="#">lifestyle</a>
