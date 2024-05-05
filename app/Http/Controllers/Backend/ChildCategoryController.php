@@ -96,8 +96,13 @@ class ChildCategoryController extends Controller
     return response(['status' => 'success', 'message' => 'Deletd Successfully!']);
   }
 
-  public function changeStatus()
+  public function changeStatus(Request $request)
   {
+    $childCategory = ChildCategory::findOrFail($request->id);
+    $childCategory->status = $request->isChecked == 'true' ? 1 : 0;
+    $childCategory->save();
+
+    return response(['status' => 'success', 'message' => 'Updated Successfully!']);
   }
   /**
    * Get Sub Categories based on category's Id
