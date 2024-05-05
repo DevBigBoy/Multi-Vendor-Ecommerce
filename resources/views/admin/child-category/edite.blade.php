@@ -3,11 +3,11 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Sub-Categories</h1>
+            <h1>Child Category</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.subcategory.index') }}">Sub-Categories</a></div>
-                <div class="breadcrumb-item">Edit</div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.childcategory.index') }}">Child Category</a></div>
+                <div class="breadcrumb-item">All</div>
             </div>
         </div>
 
@@ -17,35 +17,46 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Edit Sub-Category</h4>
+                            <h4>Update child Category</h4>
                         </div>
                         <div class="card-body col-9">
-                            <form action="{{ route('admin.subcategory.update', $subcategory->id) }}" method="POST">
+                            <form action="{{ route('admin.childcategory.update', $childcategory->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="form-group">
                                     <label for="category">Category</label>
-                                    <select id="category" class="form-control" name="category">
+                                    <select id="category" class="form-control main-category" name="category">
                                         <option value="">Select</option>
-                                        @foreach ($catgories as $category)
-                                            <option value="{{ $category->id }}" @selected($subcategory->category_id == $category->id)>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" @selected($childcategory->category_id == $category->id)>
                                                 {{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" id="name" name="name"
-                                        value="{{ $subcategory->name }}">
+                                    <label for="sub_category">Sub Category</label>
+                                    <select id="sub_category" class="form-control sub-category" name="sub_category">
+                                        <option value="">Select</option>
+                                        @foreach ($subcategories as $subcategory)
+                                            <option value="{{ $subcategory->id }}" @selected($childcategory->sub_category_id == $subcategory->id)>
+                                                {{ $subcategory->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="name"
+                                        value="{{ $childcategory->name }}">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" class="form-control" name="status">
-                                        <option value="1" @selected($subcategory->status == 1)>Active</option>
-                                        <option value="0" @selected($subcategory->status == 0)>Inactive</option>
+                                        <option value="1" @selected($childcategory->status == 1)>Active</option>
+                                        <option value="0" @selected($childcategory->status == 0)>Inactive</option>
                                     </select>
                                 </div>
 
@@ -58,3 +69,32 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('body').on('change', '.main-category', function(e) {
+                let id = $(this).val();
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('admin.get-subcategories') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('.sub-category').html('<option value="">Select</option>')
+                        $.each(data, function(i, item) {
+                            $('.sub-category').append(
+                                `<option value="${item.id}">${item.name}</option>`)
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+
+            })
+        })
+    </script>
+@endpush

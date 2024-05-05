@@ -3,10 +3,10 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Child Categories</h1>
+            <h1>Child Category</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.childcategory.index') }}">Child Categories</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.childcategory.index') }}">Child Category</a></div>
                 <div class="breadcrumb-item">All</div>
             </div>
         </div>

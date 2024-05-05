@@ -10,6 +10,7 @@ use App\Models\ChildCategory;
 use App\Http\Controllers\Controller;
 use App\DataTables\ChildCategoryDataTable;
 use App\Http\Requests\Backend\StoreChildCategoryRequest;
+use App\Http\Requests\Backend\UpdateChildcategoryRequest;
 
 class ChildCategoryController extends Controller
 {
@@ -63,15 +64,27 @@ class ChildCategoryController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $categories = Category::get();
+    $childCategory = ChildCategory::findOrFail($id);
+    $subCategories = SubCategory::where('category_id', $childCategory->category_id)->get();
+    return view('admin.child-category.edite', ['categories' => $categories, 'subcategories' => $subCategories, 'childcategory' => $childCategory]);
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateChildcategoryRequest $request, string $id)
   {
-    //
+    $childCategory = ChildCategory::findOrFail($id);
+    $childCategory->category_id = $request->category;
+    $childCategory->sub_category_id = $request->sub_category;
+    $childCategory->name = $request->name;
+    $childCategory->status = $request->status;
+    $childCategory->save();
+
+    toastr()->success('updated Successfully!');
+
+    return redirect()->route('admin.childcategory.index');
   }
 
   /**
@@ -79,7 +92,8 @@ class ChildCategoryController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    ChildCategory::destroy($id);
+    return response(['status' => 'success', 'message' => 'Deletd Successfully!']);
   }
 
   public function changeStatus()
