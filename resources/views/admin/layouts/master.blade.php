@@ -130,12 +130,22 @@
                             method: 'DELETE',
                             url: url,
                             success: function(response) {
-                                if (response.status === 'success') {
-                                    toastr.success(response.message);
+                                if (response.status == 'success') {
+                                    Swal.fire(
+                                        'Deleted!',
+                                        response.message,
+                                        'success'
+                                    )
+                                    // toastr.success(response.message);
                                     // $('#slider-table').DataTable().draw();
                                     window.location.reload();
-                                } else if (response.status === 'error') {
-                                    toastr.error(response.message);
+                                } else if (response.status == 'error') {
+                                    Swal.fire(
+                                        'Can\'t Delete',
+                                        response.message,
+                                        'error'
+                                    )
+                                    // toastr.error(response.message);
                                 }
                             },
 
