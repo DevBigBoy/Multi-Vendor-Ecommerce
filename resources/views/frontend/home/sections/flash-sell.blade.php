@@ -3,7 +3,7 @@
         <div class=" container">
             <div class="row">
                 <div class="col-xl-12">
-                    <div class="offer_time" style="background: url(images/flash_sell_bg.jpg)">
+                    <div class="offer_time" style="background: url(frontend/images/flash_sell_bg.jpg)">
                         <div class="wsus__flash_coundown">
                             <span class=" end_text">flash sell</span>
                             <div class="simply-countdown simply-countdown-one"></div>
@@ -112,9 +112,9 @@
                         <span class="wsus__new">New</span>
                         <span class="wsus__minus">-20%</span>
                         <a class="wsus__pro_link" href="product_details.html">
-                            <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="product"
+                            <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="product"
                                 class="img-fluid w-100 img_1" />
-                            <img src="{{ asset('frontend/images/pro2_2.jpg') }}" alt="product"
+                            <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="product"
                                 class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">

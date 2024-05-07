@@ -77,7 +77,7 @@
                         <a class="wsus__pro_link" href="product_details.html">
                             <img src="{{ asset('frontend/images/tab_1.jpg') }}" alt="product"
                                 class="img-fluid w-100 img_1" />
-                            <img src="{{ asset('frontend/images/tab_2.jpg') }}" alt="product"
+                            <img src="{{ asset('frontend/images/pro9.jpg') }}" alt="product"
                                 class="img-fluid w-100 img_2" />
                         </a>
                         <ul class="wsus__single_pro_icon">

@@ -339,7 +339,7 @@
                              <a class="wsus__pro_link" href="product_details.html">
                                  <img src="{{ asset('frontend/images/tab_1.jpg') }}" alt="product"
                                      class="img-fluid w-100 img_1" />
-                                 <img src="{{ asset('frontend/images/tab_2.jpg') }}" alt="product"
+                                 <img src="{{ asset('frontend/images/pro9.jpg') }}" alt="product"
                                      class="img-fluid w-100 img_2" />
                              </a>
                              <ul class="wsus__single_pro_icon">
@@ -530,7 +530,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">
@@ -549,7 +549,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">
@@ -568,7 +568,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">
@@ -587,7 +587,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">

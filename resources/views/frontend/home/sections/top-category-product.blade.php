@@ -134,7 +134,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  cloth cam wat">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">
@@ -153,7 +153,7 @@
                      <div class="col-xl-2 col-6 col-sm-6 col-md-4 col-lg-3  elec spk">
                          <a class="wsus__hot_deals__single" href="#">
                              <div class="wsus__hot_deals__single_img">
-                                 <img src="{{ asset('frontend/images/pro2.jpg') }}" alt="bag"
+                                 <img src="{{ asset('frontend/images/pro3.jpg') }}" alt="bag"
                                      class="img-fluid w-100">
                              </div>
                              <div class="wsus__hot_deals__single_text">
