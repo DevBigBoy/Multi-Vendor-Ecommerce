@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProfileController;
@@ -32,3 +33,7 @@ Route::resource('subcategory', SubCategoryController::class);
 Route::put('childcategory/change-status', [ChildCategoryController::class, 'changeStatus'])->name('childcategory.change.status');
 Route::get('get-subcategories', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
 Route::resource('childcategory', ChildCategoryController::class);
+
+/** Brand Routes  */
+Route::put('brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.changestatus');
+Route::resource('brand', BrandController::class);
