@@ -59,7 +59,7 @@ class SliderDataTable extends DataTable
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
-      ->orderBy(1)
+      ->orderBy(5, 'asc')
       ->selectStyleSingle()
       ->buttons([
         Button::make('excel'),

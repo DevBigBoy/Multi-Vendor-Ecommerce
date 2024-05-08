@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\backend\CreateSubCategoryRequest;
+use App\Http\Requests\Backend\CreateSubCategoryRequest;
 use App\Http\Requests\Backend\UpdateSubCategoryRequest;
 use App\Models\Category;
 use App\Models\ChildCategory;
