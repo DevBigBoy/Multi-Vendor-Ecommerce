@@ -9,9 +9,6 @@ trait ImageUploadTrait
   public function uploadImage($request, $inputName, $path)
   {
     if ($request->hasFile($inputName)) {
-      // if (File::exists(public_path($path))) {
-      //   File::delete(public_path($path));
-      // }
 
       $image = $request->{$inputName};
       $imageExt = $image->getClientOriginalExtension();
