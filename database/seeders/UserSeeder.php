@@ -8,36 +8,36 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
-    {
-        DB::table('users')->insert([
-            [
-                'name' => 'Admin user',
-                'username' => 'adminuser',
-                'email' => 'admin@gmail.com',
-                'role' => 'admin',
-                'status' => 'active',
-                'password' => bcrypt('shezo123'),
-            ],
-            [
-                'name' => 'Vendor user',
-                'username' => 'vendoruser',
-                'email' => 'vendor@gmail.com',
-                'role' => 'vendor',
-                'status' => 'active',
-                'password' => bcrypt('shezo123'),
-            ],
-            [
-                'name' => 'User',
-                'username' => 'user',
-                'email' => 'user@gmail.com',
-                'role' => 'user',
-                'status' => 'active',
-                'password' => bcrypt('shezo123'),
-            ],
-        ]);
-    }
+  /**
+   * Run the database seeds.
+   */
+  public function run(): void
+  {
+    DB::table('users')->insert([
+      [
+        'name' => 'Admin user',
+        'username' => 'adminuser',
+        'email' => 'admin@gmail.com',
+        'role' => 'admin',
+        'status' => 'active',
+        'password' => bcrypt('Shezo@123'),
+      ],
+      [
+        'name' => 'Vendor user',
+        'username' => 'vendoruser',
+        'email' => 'vendor@gmail.com',
+        'role' => 'vendor',
+        'status' => 'active',
+        'password' => bcrypt('Shezo@123'),
+      ],
+      [
+        'name' => 'User',
+        'username' => 'user',
+        'email' => 'user@gmail.com',
+        'role' => 'user',
+        'status' => 'active',
+        'password' => bcrypt('Shezo@123'),
+      ],
+    ]);
+  }
 }

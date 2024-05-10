@@ -1,4 +1,5 @@
 @extends('admin.layouts.master')
+@section('title', 'Admin Profile')
 
 @section('content')
     <section class="section">
