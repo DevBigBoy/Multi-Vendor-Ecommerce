@@ -10,10 +10,11 @@ use App\DataTables\BrandDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreBrandRequest;
 use App\Http\Requests\Backend\UpdateBrandRequest;
+use App\Traits\ImageDeleteTrait;
 
 class BrandController extends Controller
 {
-  use ImageUploadTrait;
+  use ImageUploadTrait, ImageDeleteTrait;
 
   protected $imageFolder = 'uploads/brands/';
   /**
@@ -96,6 +97,19 @@ class BrandController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $brand = Brand::findOrFail($id);
+    $this->deleteImage($brand->logo);
+    $brand->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+  }
+
+  public function changeStatus(Request $request)
+  {
+    $brand = Brand::findOrFail($request->id);
+    $brand->status = $request->isChecked == 'true' ? 1 : 0;
+    $brand->save();
+
+    return response(['status' => 'success', 'message' => 'Updated Successfully!']);
   }
 }
