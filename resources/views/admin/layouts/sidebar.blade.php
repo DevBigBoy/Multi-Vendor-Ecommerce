@@ -52,8 +52,8 @@
                     <span>Ecommerce</span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li class="{{ setActive(['admin.vendor-profile.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.vendor-profile.index') }}">Vendor Profile</a>
+                    <li class="{{ setActive(['admin.vendor_profile.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.vendor_profile.index') }}">Vendor Profile</a>
                     </li>
                 </ul>
             </li>

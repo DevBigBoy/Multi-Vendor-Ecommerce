@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdminVendorProfileRequest extends FormRequest
 {
@@ -22,14 +23,15 @@ class UpdateAdminVendorProfileRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'phone' => [],
-      'email' => [],
-      'address' => [],
-      'description' => [],
-      'banner' => [],
-      'fb_link' => [],
-      'insta_link' => [],
-      'tw_link' => [],
+      'phone' => ['required', 'string', 'max:50'],
+      'email' => ['required', 'email',  Rule::unique('vendors')->ignore($this->vendor_profile)],
+      'address' => ['required', 'string'],
+      'description' => ['required'],
+      'banner' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+      'fb_link' => ['nullable', 'url'],
+      'insta_link' => ['nullable', 'url'],
+      'tw_link' => ['nullable', 'url'],
+      'status' => ['required', 'boolean'],
     ];
   }
 }

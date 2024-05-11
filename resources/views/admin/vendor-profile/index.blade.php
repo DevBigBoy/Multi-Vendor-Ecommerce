@@ -12,7 +12,7 @@
             <h1>Vendor Profile</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.vendor-profile.index') }}">Vendor profile</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.vendor_profile.index') }}">Vendor profile</a></div>
                 <div class="breadcrumb-item">All</div>
             </div>
         </div>
@@ -26,16 +26,15 @@
                             <h4>Update Vendor Profile</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('admin.vendor-profile.store') }}" method="POST"
+                            <form action="{{ route('admin.vendor_profile.update', $vendor->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-
-
+                                @method('PUT')
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="phone"
-                                            value="{{ old('phone') }}">
+                                            value="{{ $vendor->phone }}">
                                     </div>
                                 </div>
 
@@ -43,7 +42,7 @@
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="email"
-                                            value="{{ old('email') }}">
+                                            value="{{ $vendor->email }}">
                                     </div>
                                 </div>
 
@@ -51,7 +50,7 @@
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="address"
-                                            value="{{ old('address') }}">
+                                            value="{{ $vendor->address }}">
                                     </div>
                                 </div>
 
@@ -59,7 +58,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <textarea class="summernote" name="description">{{ old('description') }}</textarea>
+                                        <textarea class="summernote" name="description">{{ $vendor->description }}</textarea>
                                     </div>
                                 </div>
 
@@ -74,20 +73,22 @@
                                 </div>
 
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Facebook
-                                        Link</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                        Facebook Link
+                                    </label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="fb_link"
-                                            value="{{ old('fb_link') }}">
+                                            value="{{ $vendor->fb_link }}">
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Instagram
-                                        Link</label>
+                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
+                                        Instagram Link
+                                    </label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="insta_link"
-                                            value="{{ old('insta_link') }}">
+                                            value="{{ $vendor->insta_link }}">
                                     </div>
                                 </div>
 
@@ -97,7 +98,7 @@
                                     </label>
                                     <div class="col-sm-12 col-md-7">
                                         <input type="text" class="form-control" name="tw_link"
-                                            value="{{ old('tw_link') }}">
+                                            value="{{ $vendor->tw_link }}">
                                     </div>
                                 </div>
 
@@ -105,10 +106,10 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric">
+                                        <select class="form-control selectric" name="status">
                                             <option>Select</option>
-                                            <option>Active</option>
-                                            <option>Inactive</option>
+                                            <option value="1" @selected($vendor->status == 1)>Active</option>
+                                            <option value="0" @selected($vendor->status == 0)>Inactive</option>
                                         </select>
                                     </div>
                                 </div>
@@ -134,7 +135,7 @@
     <script>
         $(document).ready(function() {
             $('.image-preview').css({
-                'background-image': 'url()',
+                'background-image': 'url({{ asset($vendor->banner) }})',
                 'background-size': 'cover',
                 'background-position': 'center center'
             })
