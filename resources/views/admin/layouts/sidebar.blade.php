@@ -43,8 +43,8 @@
                     <li class="{{ setActive(['admin.brand.*']) }}">
                         <a class="nav-link" href="{{ route('admin.brand.index') }}">Brands</a>
                     </li>
-                    <li class="{{ setActive(['admin.brand.*']) }}">
-                        <a class="nav-link" href="{{ route('admin.brand.index') }}">Products</a>
+                    <li class="{{ setActive(['admin.product.*']) }}">
+                        <a class="nav-link" href="{{ route('admin.product.index') }}">Products</a>
                     </li>
                 </ul>
             </li>

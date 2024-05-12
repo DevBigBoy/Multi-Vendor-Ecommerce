@@ -12,9 +12,9 @@
 }
 
 .selectric {
-  border: 1px solid #DDD;
+  border: 1px solid brown;
   border-radius: 0px;
-  background: #F8F8F8;
+  background: #f8f8f8;
   position: relative;
   overflow: hidden;
 }
@@ -30,9 +30,9 @@
   color: #444;
   height: 38px;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .selectric .button {
@@ -43,8 +43,8 @@
   width: 38px;
   height: 38px;
   line-height: 38px;
-  background-color: #F8f8f8;
-  color: #BBB;
+  background-color: #f8f8f8;
+  color: #bbb;
   text-align: center;
   font: 0/0 a;
   *font: 20px/38px Lucida Sans Unicode, Arial Unicode MS, Arial;
@@ -61,12 +61,12 @@
   width: 0;
   height: 0;
   border: 4px solid transparent;
-  border-top-color: #BBB;
+  border-top-color: #bbb;
   border-bottom: none;
 }
 
 .selectric-focus .selectric {
-  border-color: #aaaaaa;
+  border-color: brown;
 }
 
 .selectric-hover .selectric {
@@ -98,9 +98,9 @@
   opacity: 0.5;
   cursor: default;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .selectric-hide-select {
@@ -163,7 +163,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background: #F8F8F8;
+  background: #f8f8f8;
   border: 1px solid #c4c4c4;
   z-index: -1;
   box-shadow: 0 0 10px -6px;
@@ -172,6 +172,7 @@
 .selectric-items .selectric-scroll {
   height: 100%;
   overflow: auto;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
 .selectric-above .selectric-items {
@@ -179,7 +180,8 @@
   bottom: 100%;
 }
 
-.selectric-items ul, .selectric-items li {
+.selectric-items ul,
+.selectric-items li {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -196,17 +198,17 @@
 }
 
 .selectric-items li.selected {
-  background: #E0E0E0;
+  background: #e0e0e0;
   color: #444;
 }
 
 .selectric-items li.highlighted {
-  background: #D0D0D0;
+  background: #d0d0d0;
   color: #444;
 }
 
 .selectric-items li:hover {
-  background: #D5D5D5;
+  background: #d5d5d5;
   color: #444;
 }
 
@@ -217,9 +219,9 @@
   background: none !important;
   color: #666 !important;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .selectric-items .selectric-group .selectric-group-label {
@@ -227,9 +229,9 @@
   padding-left: 10px;
   cursor: default;
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   background: none;
   color: #444;
 }
