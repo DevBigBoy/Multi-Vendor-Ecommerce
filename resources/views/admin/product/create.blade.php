@@ -28,6 +28,7 @@
                         <div class="card-body">
                             <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Image</label>
                                     <div class="col-sm-12 col-md-7">
@@ -49,7 +50,7 @@
                                 <div class="form-row mb-4 col-md-10 justify-content-between">
                                     <div class="form-group col-md-4">
                                         <label class="col-form-label">Category</label>
-                                        <select class="form-control selectric main-category" name="category">
+                                        <select class="form-control  main-category" name="category">
                                             <option value="">Select</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -61,7 +62,7 @@
                                             Sub Category
                                         </label>
 
-                                        <select class="form-control selectric  sub-category" name="sub_category">
+                                        <select class="form-control sub-category" name="sub_category">
                                             <option value="">Select</option>
                                         </select>
                                     </div>
@@ -69,7 +70,7 @@
                                         <label class="col-form-label  ">
                                             Child Category
                                         </label>
-                                        <select class="form-control selectric child-category" name="child_category">
+                                        <select class="form-control child-category" name="child_category">
                                             <option value="">Select</option>
                                         </select>
                                     </div>
@@ -80,7 +81,7 @@
                                         Brand
                                     </label>
                                     <div class="col-md-10">
-                                        <select class="form-control selectric" name="brand">
+                                        <select class="form-control" name="brand">
                                             <option value="">Select</option>
                                             @foreach ($brands as $brand)
                                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -88,6 +89,41 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <div class="form-group mb-4">
+                                    <label class="col-form-label">Stock Quantity</label>
+                                    <div class="col-md-10">
+                                        <input type="number" min="0" class="form-control" name="qty"
+                                            value="{{ old('qty') }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label class="col-form-label">Short Description</label>
+                                    <div class="col-md-10">
+                                        <textarea class="summernote-simple" name="short_description">{{ old('short_description') }}</textarea>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group mb-4">
+                                    <label class="col-form-label">Long Description</label>
+                                    <div class="col-md-10">
+                                        <textarea class="summernote" name="long_description">{{ old('long_description') }}</textarea>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group mb-4">
+                                    <label class="col-form-label">Video's Link</label>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" name="video_link"
+                                            value="{{ old('video_link') }}">
+                                    </div>
+                                </div>
+
+
 
                                 <div class="form-group mb-4">
                                     <label class="col-form-label">SKU</label>
@@ -115,53 +151,22 @@
                                     <div class="form-group col-md-3">
                                         <label for="startDate">Offer Start Date</label>
                                         <input type="text" class="form-control datepicker" id="startDate"
-                                            name="offer_start_date" value="{{ old('start_date') }}">
+                                            name="offer_start_date" value="{{ old('offer_start_date') }}">
                                     </div>
-
-
                                     <div class="form-group col-md-3">
                                         <label for="startDate">Offer End Date</label>
                                         <input type="text" class="form-control datepicker" id="endDate"
-                                            name="offer_end_date" value="{{ old('end_date') }}">
+                                            name="offer_end_date" value="{{ old('offer_end_date') }}">
                                     </div>
                                 </div>
 
 
-                                <div class="form-group mb-4">
-                                    <label class="col-form-label">Stock Quantity</label>
-                                    <div class="col-md-10">
-                                        <input type="number" min="0" class="form-control" name="qty"
-                                            value="{{ old('qty') }}">
-                                    </div>
-                                </div>
 
-                                <div class="form-group mb-4">
-                                    <label class="col-form-label">Video's Link</label>
-                                    <div class="col-md-10">
-                                        <input type="text" class="form-control" name="video_link"
-                                            value="{{ old('video_link') }}">
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-4">
-                                    <label class="col-form-label">Short Description</label>
-                                    <div class="col-md-10">
-                                        <textarea class="summernote-simple" name="short_description">{{ old('short_description') }}</textarea>
-                                    </div>
-                                </div>
-
-
-                                <div class="form-group mb-4">
-                                    <label class="col-form-label">Long Description</label>
-                                    <div class="col-md-10">
-                                        <textarea class="summernote" name="long_description">{{ old('long_description') }}</textarea>
-                                    </div>
-                                </div>
 
                                 <div class="form-row col-md-10 justify-content-between">
                                     <div class="form-group col-md-4">
                                         <label for="status">Is Top</label>
-                                        <select id="status" class="form-control selectric" name="is_top">
+                                        <select id="status" class="form-control " name="is_top">
                                             <option value="">Select</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
@@ -169,7 +174,7 @@
                                     </div>
                                     <div class="form-group col-md-3">
                                         <label for="status">Is Best</label>
-                                        <select id="status" class="form-control selectric" name="is_best">
+                                        <select id="status" class="form-control " name="is_best">
                                             <option value="">Select</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
@@ -179,7 +184,7 @@
 
                                     <div class="form-group col-md-3">
                                         <label for="status">Is Featured</label>
-                                        <select id="status" class="form-control selectric" name="is_featured">
+                                        <select id="status" class="form-control " name="is_featured">
                                             <option value="">Select</option>
                                             <option value="1">Yes</option>
                                             <option value="0">No</option>
@@ -198,13 +203,13 @@
                                 <div class="form-group mb-4">
                                     <label class="col-form-label">SEO Description</label>
                                     <div class="col-md-10">
-                                        <textarea class="summernote-simple" name="seo_description">{{ old('seo_description') }}</textarea>
+                                        <textarea class="summernote-simple" name="seo_decription">{{ old('seo_decription') }}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="form-group col-md-10  mb-4">
                                     <label for="status">Status</label>
-                                    <select id="status" class="form-control selectric" name="status">
+                                    <select id="status" class="form-control " name="status">
                                         <option value="">Select</option>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
@@ -229,7 +234,7 @@
 
 @push('scripts')
     <script>
-        $("select").selectric();
+        // $("select").selectric();
         $(document).ready(function() {
             $('body').on('change', '.main-category', function(e) {
                 let id = $(this).val();
@@ -241,11 +246,10 @@
                         id: id
                     },
                     success: function(data) {
-                        $('.sub-category').html('<option value="">Select</option>').selectric();
+                        $('.sub-category').html('<option value="">Select</option>');
                         $.each(data, function(i, item) {
                             $('.sub-category').append(
-                                    `<option value="${item.id}">${item.name}</option>`)
-                                .selectric();
+                                `<option value="${item.id}">${item.name}</option>`);
                         })
                     },
                     error: function(xhr, status, error) {
@@ -264,12 +268,10 @@
                         id: id
                     },
                     success: function(data) {
-                        $('.child-category').html('<option value="">Select</option>')
-                            .selectric();
+                        $('.child-category').html('<option value="">Select</option>');
                         $.each(data, function(i, item) {
                             $('.child-category').append(
-                                    `<option value="${item.id}">${item.name}</option>`)
-                                .selectric();
+                                `<option value="${item.id}">${item.name}</option>`);
                         })
                     },
                     error: function(xhr, status, error) {

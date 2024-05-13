@@ -22,7 +22,27 @@ class StoreProductRequest extends FormRequest
   public function rules(): array
   {
     return [
-      //
+      'image' => ['required', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
+      'name' => ['required', 'string', 'max:255'],
+      'category' => ['required'],
+      'sub_category' => ['required'],
+      'child_category' => ['required'],
+      'brand' => ['required'],
+      'qty' => ['required'],
+      'short_description' => ['required', 'max:1500'],
+      'long_description' => ['required'],
+      'price' => ['required'],
+      'is_top' => ['required'],
+      'is_best' => ['required'],
+      'is_featured' => ['required'],
+      'status' => ['required'],
+      'video_link' => ['nullable', 'url'],
+      'sku' => ['nullable'],
+      'offer_price' => ['nullable'],
+      'offer_start_date' => ['nullable', 'date'],
+      'offer_end_date' => ['nullable', 'date'],
+      'seo_title' => ['nullable', 'string', 'max:200'],
+      'seo_decription' => ['nullable', 'string', 'max:250'],
     ];
   }
 }
