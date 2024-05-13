@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-iconpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/jquery-selectric/selectric.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
@@ -73,7 +73,7 @@
     <script src="{{ asset('backend/assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/moment.min.js') }}"></script>
     <script src="{{ asset('backend/assets/js/stisla.js') }}"></script>
-
+    <script src="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/jquery-selectric/jquery.selectric.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 
@@ -110,7 +110,6 @@
 
     <!-- Dynamic Delete alart -->
     <script>
-        $("select").selectric();
         $.uploadPreview({
             input_field: "#image-upload", // Default: .image-upload
             preview_box: "#image-preview", // Default: .image-preview
@@ -152,8 +151,6 @@
                                         response.message,
                                         'success'
                                     )
-                                    // toastr.success(response.message);
-                                    // $('#slider-table').DataTable().draw();
                                     window.location.reload();
                                 } else if (response.status == 'error') {
                                     Swal.fire(
