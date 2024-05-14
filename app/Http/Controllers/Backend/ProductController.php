@@ -108,6 +108,14 @@ class ProductController extends Controller
     //
   }
 
+  public function changeStatus(Request $request)
+  {
+    $product = Product::findOrFail($request->id);
+    $product->status =  $request->isChecked == 'true' ? 1 : 0;
+    $product->save();
+    return response(['status' => 'success', 'message' => 'Updated Successfully!']);
+  }
+
   public function getSubCategories(Request $request)
   {
     $categories = Category::find($request->id)->subCategories;

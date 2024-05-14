@@ -165,8 +165,8 @@
                                     <select id="status" class="form-control " name="product_type">
                                         <option value="0">Select</option>
                                         <option value="new_arrival">New Arrival</option>
-                                        <option value="featured">Featured</option>
-                                        <option value="top">Top</option>
+                                        <option value="featured_product">Featured</option>
+                                        <option value="top_product">Top</option>
                                         <option value="best_product">Best Product</option>
                                     </select>
                                 </div>
