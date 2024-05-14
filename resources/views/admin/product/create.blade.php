@@ -160,36 +160,15 @@
                                     </div>
                                 </div>
 
-
-
-
-                                <div class="form-row col-md-10 justify-content-between">
-                                    <div class="form-group col-md-4">
-                                        <label for="status">Is Top</label>
-                                        <select id="status" class="form-control " name="is_top">
-                                            <option value="">Select</option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-md-3">
-                                        <label for="status">Is Best</label>
-                                        <select id="status" class="form-control " name="is_best">
-                                            <option value="">Select</option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="form-group col-md-3">
-                                        <label for="status">Is Featured</label>
-                                        <select id="status" class="form-control " name="is_featured">
-                                            <option value="">Select</option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
-                                        </select>
-                                    </div>
+                                <div class="form-group">
+                                    <label for="status">Protduct Type</label>
+                                    <select id="status" class="form-control " name="product_type">
+                                        <option value="0">Select</option>
+                                        <option value="new_arrival">New Arrival</option>
+                                        <option value="featured">Featured</option>
+                                        <option value="top">Top</option>
+                                        <option value="best_product">Best Product</option>
+                                    </select>
                                 </div>
 
                                 <div class="form-group mb-4">

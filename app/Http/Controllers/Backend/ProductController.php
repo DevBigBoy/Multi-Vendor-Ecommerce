@@ -57,12 +57,10 @@ class ProductController extends Controller
     $product->child_category_id  = $validated['child_category'];
     $product->brand_id  = $validated['brand'];
     $product->qty = $validated['qty'];
+    $product->price = $validated['price'];
     $product->short_description = $validated['short_description'];
     $product->long_description = $validated['long_description'];
-    $product->price = $validated['price'];
-    $product->is_top = $validated['is_top'];
-    $product->is_best = $validated['is_best'];
-    $product->is_featured = $validated['is_featured'];
+    $product->product_type = $validated['product_type'];
     $product->status = $validated['status'];
     $product->video_link = $validated['video_link'];
     $product->sku = $validated['sku'];
