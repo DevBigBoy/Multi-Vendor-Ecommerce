@@ -11,16 +11,16 @@ class Product extends Model
 
   public function category()
   {
-    $this->belongsTo(Category::class);
+    return $this->belongsTo(Category::class);
   }
 
   public function subcategory()
   {
-    $this->belongsTo(SubCategory::class);
+    return $this->belongsTo(SubCategory::class);
   }
 
   public function childcategory()
   {
-    $this->belongsTo(ChildCategory::class);
+    return $this->belongsTo(ChildCategory::class);
   }
 }

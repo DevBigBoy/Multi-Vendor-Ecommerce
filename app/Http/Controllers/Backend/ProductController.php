@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreProductRequest;
+use App\Models\ChildCategory;
 use App\Models\Vendor;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Auth;
@@ -89,7 +90,16 @@ class ProductController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $product = Product::findOrFail($id);
+    $categories = Category::all();
+    $brands = Brand::all();
+
+    $subCategries = SubCategory::where('category_id', $product->category_id)->get();
+    $childcategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
+    return view(
+      'admin.product.edit',
+      ['product' => $product, 'categories' => $categories, 'subCategries' => $subCategries, 'childcategories' => $childcategories, 'brands' => $brands]
+    );
   }
 
   /**
