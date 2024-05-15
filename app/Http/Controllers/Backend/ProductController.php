@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\DataTables\ProductDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreProductRequest;
+use App\Http\Requests\Backend\UpdateProductRequest;
 use App\Models\ChildCategory;
 use App\Models\Vendor;
 use App\Traits\ImageUploadTrait;
@@ -105,9 +106,39 @@ class ProductController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateProductRequest $request, string $id)
   {
-    //
+    $validated = $request->validated();
+
+    $product = Product::findOrFail($id);
+
+    $imagePath  = $this->updateImage($request, 'image', $this->imageFolder, $product->thumb_image);
+    $product->name = $validated['name'];
+    $product->slug = Str::slug($validated['name']);
+    $product->thumb_image = $imagePath ?? $product->thumb_image;
+    $product->vendor_id = Auth::user()->vendor->id;
+    $product->category_id = $validated['category'];
+    $product->sub_category_id = $validated['sub_category'];
+    $product->child_category_id  = $validated['child_category'];
+    $product->brand_id  = $validated['brand'];
+    $product->qty = $validated['qty'];
+    $product->price = $validated['price'];
+    $product->short_description = $validated['short_description'];
+    $product->long_description = $validated['long_description'];
+    $product->product_type = $validated['product_type'];
+    $product->status = $validated['status'];
+    $product->video_link = $validated['video_link'];
+    $product->sku = $validated['sku'];
+    $product->offer_price = $validated['offer_price'];
+    $product->offer_start_date = $validated['offer_start_date'];
+    $product->offer_end_date = $validated['offer_end_date'];
+    $product->is_approved = 1;
+    $product->seo_title = $validated['seo_title'];
+    $product->seo_decription = $validated['seo_decription'];
+    $product->save();
+
+    toastr()->success('Product Updated Successfully!');
+    return redirect()->route('admin.product.index');
   }
 
   /**
