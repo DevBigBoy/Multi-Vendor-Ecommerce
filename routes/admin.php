@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\TempImageController;
 
 /** Admin Routes */
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
