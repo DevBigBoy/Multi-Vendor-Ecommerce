@@ -7,12 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreProductImagesRequest;
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Traits\ImageDeleteTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 
 class ProductImageGalleryController extends Controller
 {
-  use ImageUploadTrait;
+  use ImageUploadTrait, ImageDeleteTrait;
 
   protected $imageFolder = 'uploads/products/';
   /**
@@ -52,35 +53,18 @@ class ProductImageGalleryController extends Controller
     return redirect()->back();
   }
 
-  /**
-   * Display the specified resource.
-   */
-  public function show(string $id)
-  {
-    //
-  }
 
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(string $id)
-  {
-    //
-  }
 
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, string $id)
-  {
-    //
-  }
 
   /**
    * Remove the specified resource from storage.
    */
   public function destroy(string $id)
   {
-    //
+    $productImage = ProductImage::findOrFail($id);
+    $this->deleteImage($productImage->image_path);
+    $productImage->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 }
