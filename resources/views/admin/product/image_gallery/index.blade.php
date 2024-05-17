@@ -8,6 +8,7 @@
             <h1>Multiple Upload</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.product.index') }}">Products</a></div>
                 <div class="breadcrumb-item">Multiple Upload</div>
             </div>
         </div>
@@ -37,19 +38,17 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>All Images</h4>
 
-
-                <div class="row">
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4>All Images</h4>
-
-                            </div>
-                            <div class="card-body">
-                                {{ $dataTable->table() }}
-                            </div>
+                        </div>
+                        <div class="card-body">
+                            {{ $dataTable->table() }}
                         </div>
                     </div>
                 </div>

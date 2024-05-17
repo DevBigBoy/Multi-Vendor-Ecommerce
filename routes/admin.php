@@ -8,10 +8,12 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
+use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TempImageController;
+use App\Models\ProductVariant;
 
 /** Admin Routes */
 Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -51,5 +53,8 @@ Route::get('product/get_subcategories', [ProductController::class, 'getSubCatego
 Route::get('product/get_childcategories', [ProductController::class, 'getChildCategories'])->name('product.get_childcategories');
 Route::resource('/product', ProductController::class);
 
-/** Vendor Profile routes */
+/** product_image_gallery routes */
 Route::resource('product_image_gallery', ProductImageGalleryController::class);
+
+/** ProductVariant routes */
+Route::resource('product_variant', ProductVariantController::class);
