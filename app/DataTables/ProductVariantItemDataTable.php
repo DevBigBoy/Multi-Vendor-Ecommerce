@@ -14,71 +14,103 @@ use Yajra\DataTables\Services\DataTable;
 
 class ProductVariantItemDataTable extends DataTable
 {
-    /**
-     * Build the DataTable class.
-     *
-     * @param QueryBuilder $query Results from query() method.
-     */
-    public function dataTable(QueryBuilder $query): EloquentDataTable
-    {
-        return (new EloquentDataTable($query))
-            ->addColumn('action', 'productvariantitem.action')
-            ->setRowId('id');
-    }
+  /**
+   * Build the DataTable class.
+   *
+   * @param QueryBuilder $query Results from query() method.
+   */
+  public function dataTable(QueryBuilder $query): EloquentDataTable
+  {
+    return (new EloquentDataTable($query))
+      ->addColumn('action', function ($query) {
+        $editBtn = '<a href="' . route('admin.product_variant_items.edit', $query->id) . '" class="btn btn-primary"><i class="far fa-edit"></i> Edit</a>';
+        $deleteBtn = '<a href="' . route('admin.product_variant_items.destroy', $query->id) . '" class="btn btn-danger ml-2 delete-item"><i class="fas fa-trash"></i> Delete</a>';
+        return $editBtn . $deleteBtn;
+      })
+      ->addColumn('status', function ($query) {
+        if ($query->status == 1) {
+          $button = '
+          <label class="custom-switch mt-2">
+            <input type="checkbox" checked name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
+            <span class="custom-switch-indicator"></span>
+          </label>';
+        } elseif ($query->status == 0) {
+          $button = '
+          <label class="custom-switch mt-2">
+            <input type="checkbox" name="custom-switch-checkbox" data-id="' . $query->id . '" class="custom-switch-input change-status">
+            <span class="custom-switch-indicator"></span>
+          </label>';
+        }
+        return $button;
+      })
+      ->addColumn('is_default', function ($query) {
+        if ($query->is_default == 1) {
+          return "<div class='badge badge-success'>Default</div>";
+        } elseif ($query->is_default == 0) {
+          return "<div class='badge badge-danger'>Not Default</div>";
+        }
+      })
+      ->addColumn('variant_name', function ($query) {
+        return $query->productVariant->name;
+      })
+      ->rawColumns(['action', 'status', 'is_default'])
+      ->setRowId('id');
+  }
 
-    /**
-     * Get the query source of dataTable.
-     */
-    public function query(ProductVariantItem $model): QueryBuilder
-    {
-        return $model->newQuery();
-    }
+  /**
+   * Get the query source of dataTable.
+   */
+  public function query(ProductVariantItem $model): QueryBuilder
+  {
+    return $model->newQuery();
+  }
 
-    /**
-     * Optional method if you want to use the html builder.
-     */
-    public function html(): HtmlBuilder
-    {
-        return $this->builder()
-                    ->setTableId('productvariantitem-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
-    }
+  /**
+   * Optional method if you want to use the html builder.
+   */
+  public function html(): HtmlBuilder
+  {
+    return $this->builder()
+      ->setTableId('productvariantitem-table')
+      ->columns($this->getColumns())
+      ->minifiedAjax()
+      //->dom('Bfrtip')
+      ->orderBy(1)
+      ->selectStyleSingle()
+      ->buttons([
+        Button::make('excel'),
+        Button::make('csv'),
+        Button::make('pdf'),
+        Button::make('print'),
+        Button::make('reset'),
+        Button::make('reload')
+      ]);
+  }
 
-    /**
-     * Get the dataTable columns definition.
-     */
-    public function getColumns(): array
-    {
-        return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
-        ];
-    }
+  /**
+   * Get the dataTable columns definition.
+   */
+  public function getColumns(): array
+  {
+    return [
+      Column::make('id'),
+      Column::make('name'),
+      Column::make('variant_name'),
+      Column::make('price'),
+      Column::make('status'),
+      Column::make('is_default'),
+      Column::computed('action')
+        ->exportable(false)
+        ->printable(false)
+        ->addClass('text-center'),
+    ];
+  }
 
-    /**
-     * Get the filename for export.
-     */
-    protected function filename(): string
-    {
-        return 'ProductVariantItem_' . date('YmdHis');
-    }
+  /**
+   * Get the filename for export.
+   */
+  protected function filename(): string
+  {
+    return 'ProductVariantItem_' . date('YmdHis');
+  }
 }

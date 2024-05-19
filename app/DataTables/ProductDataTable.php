@@ -40,6 +40,15 @@ class ProductDataTable extends DataTable
       ->addColumn('Image', function ($query) {
         return "<img width='100px' src='" . asset($query->thumb_image) . "'></img>";
       })
+      ->addColumn('category', function ($query) {
+        return $query->category->name;
+      })
+
+      ->addColumn('subcategory', function ($query) {
+        return $query->subcategory->name;
+      })
+
+
       ->addColumn('Product Type', function ($query) {
         switch ($query->product_type) {
           case 'new_arrival':
@@ -126,6 +135,8 @@ class ProductDataTable extends DataTable
       Column::make('Image'),
       Column::make('Product Type'),
       Column::make('Status'),
+      Column::make('category'),
+      Column::make('subcategory'),
       Column::computed('Action')
         ->exportable(false)
         ->printable(false)

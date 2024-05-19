@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,7 @@ class Product extends Model
 
   public function subcategory()
   {
-    return $this->belongsTo(SubCategory::class);
+    return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
   }
 
   public function childcategory()
@@ -32,5 +33,9 @@ class Product extends Model
   public function productVariants()
   {
     return $this->hasMany(ProductVariant::class);
+  }
+
+  public function scopeFilter(Builder $builder, $filters)
+  {
   }
 }
