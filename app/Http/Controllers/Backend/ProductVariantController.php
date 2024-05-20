@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\StoreProductVariantRequest;
 use App\Http\Requests\Backend\UpdateProductVariantRequest;
 use App\Models\Product;
 use App\Models\ProductVariant;
+use App\Models\ProductVariantItem;
 use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -90,6 +91,10 @@ class ProductVariantController extends Controller
    */
   public function destroy(string $id)
   {
+    if (ProductVariantItem::where('variant_id', $id)->count() > 0) {
+      return response(['status' => 'error', 'message' => 'This Variant Has items please delete it first']);
+    }
+
     $this->model::destroy($id);
     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
