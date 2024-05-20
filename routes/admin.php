@@ -63,7 +63,7 @@ Route::put('product_variant/changestatus', [ProductVariantController::class, 'ch
 Route::resource('product_variant', ProductVariantController::class);
 
 /** ProductVariantItem routes */
-Route::put('product_variant_item/changestatus', [ProductVariantController::class, 'changeStatus'])->name('product_variant_item.changestatus');
+Route::put('product_variant_items/changestatus', [ProductVariantItemController::class, 'changeStatus'])->name('product_variant_items.changestatus');
 
 Route::get('product_variant_items/{productId}/{variantId}', [ProductVariantItemController::class, 'index'])->name('product_variant_items.index');
 Route::get('product_variant_items/{productId}/{variantId}/create', [ProductVariantItemController::class, 'create'])->name('product_variant_items.create');

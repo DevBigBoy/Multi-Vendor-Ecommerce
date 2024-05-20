@@ -69,4 +69,18 @@ class ProductVariantItemController extends Controller
       'variantId' => $item->variant_id
     ]);
   }
+
+  public function destroy($variantItemId)
+  {
+    $this->model::destroy($variantItemId);
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+  }
+
+  public function changeStatus(Request $request)
+  {
+    $item = $this->model::find($request->id);
+    $item->status = $request->isChecked == 'true' ? 1 : 0;
+    $item->save();
+    return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);
+  }
 }
