@@ -13,13 +13,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\StoreProductRequest;
 use App\Http\Requests\Backend\UpdateProductRequest;
 use App\Models\ChildCategory;
+use App\Models\ProductImage;
+use App\Models\ProductVariant;
 use App\Models\Vendor;
+use App\Traits\ImageDeleteTrait;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-  use ImageUploadTrait;
+  use ImageUploadTrait, ImageDeleteTrait;
 
   protected $imageFolder = 'uploads/products/';
 
@@ -146,7 +149,27 @@ class ProductController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $product = Product::findOrFail($id);
+    /** Delete The Main Image */
+    $this->deleteImage($product->thumb_image);
+
+    /** Delete Product Related Images */
+    $productImages = ProductImage::where('product_id', $product->id)->get();
+    foreach ($productImages as $productImage) {
+      $this->deleteImage($productImage->image_path);
+      $productImage->delete();
+    }
+
+    /**Delete Product Variants */
+    $productVariants = ProductVariant::where('product_id', $product->id)->get();
+    foreach ($productVariants as $productVariant) {
+      $productVariant->productVariantItems()->delete();
+      $productVariant->delete();
+    }
+
+    $product->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 
   public function changeStatus(Request $request)
