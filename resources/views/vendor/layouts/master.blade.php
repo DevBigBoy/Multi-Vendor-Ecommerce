@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}" />
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
+
+    @yield('css')
 </head>
 
 <body>
@@ -97,6 +99,8 @@
             @endforeach
         @endif
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>
