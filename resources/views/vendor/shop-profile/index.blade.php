@@ -2,7 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/summernote/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
 @endsection
 
@@ -21,106 +20,118 @@
                         </h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-                                <h4>
-
-                                </h4>
-                                <form action="{{ route('admin.vendor_profile.update', $vendor->id) }}" method="POST"
+                                <form action="{{ route('vendor.shop-profile.update', $vendor->id) }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="phone"
-                                                value="{{ $vendor->phone }}">
-                                        </div>
-                                    </div>
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="email"
-                                                value="{{ $vendor->email }}">
-                                        </div>
-                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-9">
+                                            <div class="row">
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="address"
-                                                value="{{ $vendor->address }}">
-                                        </div>
-                                    </div>
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <i class="far fa-phone-alt"></i>
+                                                        <input type="text" class="form-control" name="phone"
+                                                            value="{{ $vendor->phone }}">
+                                                    </div>
+                                                </div>
 
+                                                <div class="col-xl-6 col-md-6">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <i class="fal fa-envelope-open"></i>
+                                                        <input type="text" class="form-control" name="email"
+                                                            value="{{ $vendor->email }}">
+                                                    </div>
+                                                </div>
 
-                                    <div class="form-group row mb-4">
-                                        <label
-                                            class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Description</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <textarea class="summernote" name="description">{{ $vendor->description }}</textarea>
-                                        </div>
-                                    </div>
+                                                <div class="col-xl-12 col-md-8">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <i class="fa fa-map-marker"></i>
+                                                        <input type="text" class="form-control" name="address"
+                                                            value="{{ $vendor->address }}">
+                                                    </div>
+                                                </div>
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">banner</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <div id="image-preview" class="image-preview">
-                                                <label for="image-upload" id="image-label">Choose File</label>
-                                                <input type="file" name="banner" id="image-upload" />
+                                                <div class="col-xl-12 col-md-8">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <i class="fa fa-anchor"></i>
+                                                        <input type="text" class="form-control" name="shop_name"
+                                                            value="{{ $vendor->shop_name ?? 'Add Shop Name' }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div class="col-xl-12 col-md-8 mb-4">
+                                                        <textarea id="summernote" name="description" placeholder="Description">{{ $vendor->description }}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12">
+                                                    <div id="medicine_row3">
+                                                        <div class="row">
+                                                            <div class="col-xl-6 col-md-6">
+                                                                <div class="wsus__dash_pro_single">
+                                                                    <i class="fa fa-facebook"></i>
+                                                                    <input type="text" class="form-control"
+                                                                        placeholder="www.facebook.com" name="fb_link"
+                                                                        value="{{ $vendor->fb_link }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6 col-md-6">
+                                                                <div class="wsus__dash_pro_single">
+                                                                    <i class="fa fa-instagram"></i>
+
+                                                                    <input type="text"
+                                                                        class="form-control"placeholder="www.instgram.com"
+                                                                        name="insta_link" value="{{ $vendor->insta_link }}">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-xl-6 col-md-6">
+                                                                <div class="wsus__dash_pro_single">
+                                                                    <i class="fa fa-twitter"></i>
+
+                                                                    <input type="text" placeholder="www.twitter.com"
+                                                                        class="form-control" name="tw_link"
+                                                                        value="{{ $vendor->tw_link }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                            Facebook Link
-                                        </label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="fb_link"
-                                                value="{{ $vendor->fb_link }}">
+                                        <div class="col-xl-3 col-sm-6 col-md-6">
+                                            <div class="wsus__dash_pro_img">
+                                                <div id="image-preview" class="image-preview"
+                                                    style="width: 100%; height:330px;">
+                                                    <label for="image-upload" id="image-label">Upload Image</label>
+                                                    <input type="file" name="banner" id="image-upload" />
+                                                </div>
+
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                            Instagram Link
-                                        </label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="insta_link"
-                                                value="{{ $vendor->insta_link }}">
+                                        <div class="form-group col-xl-8 col-md-8">
+                                            <label class="col-form-label">Status</label>
+                                            <div class="col-xl-7 col-md-6">
+                                                <select class="form-control" name="status">
+                                                    <option>Select</option>
+                                                    <option value="1" @selected($vendor->status == 1)>Active</option>
+                                                    <option value="0" @selected($vendor->status == 0)>Inactive</option>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">
-                                            Twitter Link
-                                        </label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <input type="text" class="form-control" name="tw_link"
-                                                value="{{ $vendor->tw_link }}">
-                                        </div>
-                                    </div>
 
 
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <select class="form-control selectric" name="status">
-                                                <option>Select</option>
-                                                <option value="1" @selected($vendor->status == 1)>Active</option>
-                                                <option value="0" @selected($vendor->status == 0)>Inactive</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group row mb-4">
-                                        <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                        <div class="col-sm-12 col-md-7">
-                                            <button type="submit" class="btn btn-primary">Create Vendor</button>
+                                        <div class="col-xl-12 mt-5">
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>
@@ -133,10 +144,17 @@
 
 
 @push('scripts')
-    <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 
     <script>
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 200,
+
+            });
+        });
+
         $.uploadPreview({
             input_field: "#image-upload", // Default: .image-upload
             preview_box: "#image-preview", // Default: .image-preview

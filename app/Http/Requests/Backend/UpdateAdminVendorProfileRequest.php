@@ -26,6 +26,7 @@ class UpdateAdminVendorProfileRequest extends FormRequest
       'phone' => ['required', 'string', 'max:50'],
       'email' => ['required', 'email',  Rule::unique('vendors')->ignore($this->vendor_profile)],
       'address' => ['required', 'string'],
+      'shop_name' => ['required', 'string', 'max:200'],
       'description' => ['required'],
       'banner' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
       'fb_link' => ['nullable', 'url'],

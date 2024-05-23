@@ -19,6 +19,7 @@ class Vendor extends Model
     'tw_link',
     'insta_link',
     'user_id',
+    'shop_name',
     'status',
   ];
 }

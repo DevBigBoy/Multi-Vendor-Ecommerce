@@ -21,6 +21,7 @@ class VendorShopprofileSeeder extends Seeder
       'phone' => '01025398567',
       'email' => 'vendor@gmail.com',
       'address' => 'Mansoura, Dakahlia, Egypt',
+      'shop_name' => 'Vendor Shop',
       'description' => 'Web Developer - Back End Major',
       'fb_link' => 'https://x.com/shezo',
       'tw_link' => 'https://x.com/shezo',

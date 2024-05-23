@@ -67,6 +67,7 @@ class AdminVendorProfileController extends Controller
     $vendor->banner = empty(!$bannerPath) ? $bannerPath : $vendor->banner;
     $vendor->phone = $validated['phone'];
     $vendor->email = $validated['email'];
+    $vendor->shop_name = $validated['shop_name'];
     $vendor->address = $validated['address'];
     $vendor->description = $validated['description'];
     $vendor->fb_link = $validated['fb_link'];
