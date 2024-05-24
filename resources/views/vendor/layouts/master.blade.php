@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
-    <title>One Shop || e-Commerce HTML Template</title>
+    <title>@yield('title', ' Vendor Dashboard')</title>
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" />
@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}" />
+    <!-- DataTable -->
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 
     @yield('css')
@@ -85,7 +87,8 @@
     <script src="{{ asset('frontend/js/venobox.min.js') }}"></script>
     <!--classycountdown js-->
     <script src="{{ asset('frontend/js/jquery.classycountdown.js') }}"></script>
-
+    {{-- dataTables --}}
+    <script src="{{ asset('backend/assets/js/dataTables.min.js') }}"></script>
     {{-- ToastrJs --}}
     <script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
 
