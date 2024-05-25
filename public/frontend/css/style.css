@@ -7179,6 +7179,13 @@ WISHLIST PAGE START
   margin-bottom: 30px;
 }
 
+.wsus__dash_pro_single_create {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
 .wsus__dash_pro_single i {
   width: 57px;
   height: 47px;

@@ -54,7 +54,9 @@
     <!--============================  SCROLL BUTTON  END ==============================-->
 
     <!--jquery library js-->
-    <script src="{{ asset('frontend/js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/modules/jquery.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/modules/moment.min.js') }}"></script>
+
     <!--bootstrap js-->
     <script src="{{ asset('frontend/js/bootstrap.bundle.min.js') }}"></script>
     <!--font-awesome js-->
@@ -94,6 +96,9 @@
 
     <!--main/custom js-->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+    <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
+
 
     <script>
         @if ($errors->any())

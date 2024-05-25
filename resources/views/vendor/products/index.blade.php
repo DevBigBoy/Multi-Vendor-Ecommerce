@@ -22,7 +22,7 @@
 
                             <div>
                                 <a href="{{ route('vendor.products.create') }}" class="btn btn-primary">
-                                    <i class="far fa-edit"></i>
+                                    <i class="fa fa-plus"></i>
                                     Create new
                                 </a>
                             </div>

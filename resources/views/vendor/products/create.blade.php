@@ -5,6 +5,8 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('backend/assets/modules/summernote/summernote-bs4.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/css/components.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.css') }}">
+
 @endsection
 
 @section('content')
@@ -18,125 +20,247 @@
                 <div class="col-xl-9 col-xxl-10 col-lg-9 ms-auto">
                     <div class="dashboard_content mt-2 mt-md-0">
                         <h3>
-                            <i class="far fa-user"></i>Shop profile
+                            <i class="far fa-edit"></i> Create Product
                         </h3>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('vendor.products.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
 
                                     <div class="row">
-                                        <div class="col-xl-9">
+                                        <div class="col-xl-8">
                                             <div class="row">
-
-                                                <div class="col-xl-6 col-md-6">
-                                                    <div class="wsus__dash_pro_single">
-                                                        <i class="far fa-phone-alt"></i>
-                                                        <input type="text" class="form-control" name="phone"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-6 col-md-6">
-                                                    <div class="wsus__dash_pro_single">
-                                                        <i class="fal fa-envelope-open"></i>
-                                                        <input type="text" class="form-control" name="email"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
                                                 <div class="col-xl-12 col-md-8">
-                                                    <div class="wsus__dash_pro_single">
-                                                        <i class="fa fa-map-marker"></i>
-                                                        <input type="text" class="form-control" name="address"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-12 col-md-8">
-                                                    <div class="wsus__dash_pro_single">
-                                                        <i class="fa fa-anchor"></i>
-                                                        <input type="text" class="form-control" name="shop_name"
-                                                            value="">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-12">
-                                                    <div class="col-xl-12 col-md-8 mb-4">
-                                                        <textarea id="summernote" name="description" placeholder="Description"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-xl-12">
-                                                    <div id="medicine_row3">
-                                                        <div class="row">
-                                                            <div class="col-xl-6 col-md-6">
-                                                                <div class="wsus__dash_pro_single">
-                                                                    <i class="fa fa-facebook"></i>
-                                                                    <input type="text" class="form-control"
-                                                                        placeholder="www.facebook.com" name="fb_link"
-                                                                        value="">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-xl-6 col-md-6">
-                                                                <div class="wsus__dash_pro_single">
-                                                                    <i class="fa fa-instagram"></i>
-
-                                                                    <input type="text"
-                                                                        class="form-control"placeholder="www.instgram.com"
-                                                                        name="insta_link" value="">
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-xl-6 col-md-6">
-                                                                <div class="wsus__dash_pro_single">
-                                                                    <i class="fa fa-twitter"></i>
-
-                                                                    <input type="text" placeholder="www.twitter.com"
-                                                                        class="form-control" name="tw_link" value="">
-                                                                </div>
-                                                            </div>
+                                                    <div class="wsus__dash_pro_single gap-2">
+                                                        <label class="col-form-label">Name</label>
+                                                        <div class="col-md-11">
+                                                            <input type="text" class="form-control" name="name"
+                                                                value="{{ old('name') }}">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-12 col-md-8">
+                                                    <div class="wsus__dash_pro_single gap-3">
+                                                        <label class="col-form-label">Stock Quantity</label>
+                                                        <div class="col-md-9">
+                                                            <input type="number" min="0" class="form-control"
+                                                                name="qty" value="{{ old('qty') }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6">
+                                                    <div class="form-group col-xl-12">
+                                                        <label class="col-form-label">Category</label>
+                                                        <select class="form-control  main-category" name="category">
+                                                            <option value="">Select</option>
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-6">
+                                                    <div class="form-group col-xl-12">
+                                                        <label class="col-form-label">
+                                                            Sub Category
+                                                        </label>
+
+                                                        <select class="form-control sub-category" name="sub_category">
+                                                            <option value="">Select</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xl-6 ">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <div class="form-group col-xl-12">
+                                                            <label class="col-form-label  ">
+                                                                Child Category
+                                                            </label>
+                                                            <select class="form-control child-category"
+                                                                name="child_category">
+                                                                <option value="">Select</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-6">
+                                                    <div class="wsus__dash_pro_single">
+                                                        <div class="form-group col-xl-12">
+                                                            <label class="col-form-label">
+                                                                Brand
+                                                            </label>
+                                                            <select class="form-control" name="brand">
+                                                                <option value="">Select</option>
+                                                                @foreach ($brands as $brand)
+                                                                    <option value="{{ $brand->id }}">{{ $brand->name }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
 
-                                        <div class="col-xl-3 col-sm-6 col-md-6">
+                                        <div class="col-xl-4">
                                             <div class="wsus__dash_pro_img">
                                                 <div id="image-preview" class="image-preview"
                                                     style="width: 100%; height:330px;">
-                                                    <label for="image-upload" id="image-label">Upload Image</label>
-                                                    <input type="file" name="banner" id="image-upload" />
+                                                    <label for="image-upload" id="image-label">Upload Product
+                                                        Image</label>
+                                                    <input type="file" name="thumb_image" id="image-upload" />
                                                 </div>
 
                                             </div>
                                         </div>
+                                    </div>
 
-                                        <div class="form-group col-xl-8 col-md-8">
-                                            <label class="col-form-label">Status</label>
-                                            <div class="col-xl-7 col-md-6">
-                                                <select class="form-control" name="status">
-                                                    <option>Select</option>
-                                                    <option value="1">Active</option>
-                                                    <option value="0">Inactive</option>
-                                                </select>
+                                    <div class="row mt-4">
+                                        <div class="col-xl-11">
+                                            <label class="col-form-label">Short Description</label>
+                                            <div class="col-xl-12">
+                                                <textarea class="summernote-simple" name="short_description">{{ old('short_description') }}</textarea>
                                             </div>
                                         </div>
+                                    </div>
 
+                                    <div class="row mt-4">
+                                        <div class="col-xl-11">
+                                            <label class="col-form-label">Long Description</label>
 
-                                        <div class="col-xl-12 mt-5">
-                                            <button type="submit" class="btn btn-primary">Create</button>
+                                            <div class="col-xl-12">
+                                                <textarea class="summernote" name="long_description">{{ old('long_description') }}</textarea>
+                                            </div>
                                         </div>
                                     </div>
-                                </form>
+
+                                    <div class="row mt-4 gap-4">
+                                        <div class="row gap-4">
+                                            <div class="col-xl-5">
+                                                <div class="form-group col-xl-12">
+                                                    <label class="col-form-label">Price</label>
+                                                    <input type="text" class="form-control" name="price"
+                                                        value="{{ old('price') }}">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-5">
+                                                <div class="form-group col-xl-12">
+                                                    <label class="col-form-label">Offer Price</label>
+
+                                                    <input type="text" class="form-control" name="offer_price"
+                                                        value="{{ old('offer_price') }}">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row gap-4">
+                                            <div class="col-xl-5 ">
+                                                <div class="wsus__dash_pro_single">
+                                                    <div class="form-group col-xl-12">
+                                                        <label for="startDate">Offer Start Date</label>
+                                                        <input type="text" class="form-control datepicker"
+                                                            id="startDate" name="offer_start_date"
+                                                            value="{{ old('offer_start_date') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-xl-5">
+                                                <div class="wsus__dash_pro_single">
+                                                    <div class="form-group col-xl-12">
+                                                        <label for="startDate">Offer End Date</label>
+                                                        <input type="text" class="form-control datepicker"
+                                                            id="endDate" name="offer_end_date"
+                                                            value="{{ old('offer_end_date') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="col-form-label">Video's Link</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" name="video_link"
+                                                value="{{ old('video_link') }}">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group mb-4">
+                                        <label class="col-form-label">SKU</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" name="sku"
+                                                value="{{ old('sku') }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="col-form-label">SEO Title</label>
+                                        <div class="col-md-10">
+                                            <input type="text" class="form-control" name="seo_title"
+                                                value="{{ old('seo_title') }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group mb-4">
+                                        <label class="col-form-label">SEO Description</label>
+                                        <div class="col-md-10">
+                                            <textarea class="summernote-simple" name="seo_decription">{{ old('seo_decription') }}</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-4">
+
+                                        <div class="form-group col-xl-4">
+                                            <label for="status">Protduct Type</label>
+                                            <select id="status" class="form-control " name="product_type">
+                                                <option value="0">Select</option>
+                                                <option value="new_arrival">New Arrival</option>
+                                                <option value="featured_product">Featured</option>
+                                                <option value="top_product">Top</option>
+                                                <option value="best_product">Best Product</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-xl-4">
+                                            <label for="status">Status</label>
+                                            <select id="status" class="form-control " name="status">
+                                                <option value="">Select</option>
+                                                <option value="1">Active</option>
+                                                <option value="0">Inactive</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Create</button>
                             </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!--=============================  DASHBOARD START  ==============================-->
@@ -146,31 +270,64 @@
 @push('scripts')
     <script src="{{ asset('backend/assets/modules/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('backend/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
+    <script src="{{ asset('backend/assets/modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <script>
         $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 200,
 
+            $('body').on('change', '.main-category', function(e) {
+                let id = $(this).val();
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('vendor.products.get-subcategories') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('.sub-category').html('<option value="">Select</option>');
+                        $.each(data, function(i, item) {
+                            $('.sub-category').append(
+                                `<option value="${item.id}">${item.name}</option>`);
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+            })
+
+            $('body').on('change', '.sub-category', function(e) {
+                let id = $(this).val();
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('vendor.products.get-childcategories') }}",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('.child-category').html('<option value="">Select</option>');
+                        $.each(data, function(i, item) {
+                            $('.child-category').append(
+                                `<option value="${item.id}">${item.name}</option>`);
+                        })
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                    }
+                })
+            })
+
+            $.uploadPreview({
+                input_field: "#image-upload", // Default: .image-upload
+                preview_box: "#image-preview", // Default: .image-preview
+                label_field: "#image-label", // Default: .image-label
+                label_default: "Choose File", // Default: Choose File
+                label_selected: "Change File", // Default: Change File
+                no_label: false, // Default: false
+                success_callback: null // Default: null
             });
         });
-
-        $.uploadPreview({
-            input_field: "#image-upload", // Default: .image-upload
-            preview_box: "#image-preview", // Default: .image-preview
-            label_field: "#image-label", // Default: .image-label
-            label_default: "Choose File", // Default: Choose File
-            label_selected: "Change File", // Default: Change File
-            no_label: false, // Default: false
-            success_callback: null // Default: null
-        });
-
-        $(document).ready(function() {
-            $('.image-preview').css({
-                'background-image': 'url()',
-                'background-size': 'cover',
-                'background-position': 'center center'
-            })
-        })
     </script>
 @endpush
