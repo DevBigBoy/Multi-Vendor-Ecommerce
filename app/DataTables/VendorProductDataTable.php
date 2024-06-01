@@ -24,8 +24,8 @@ class VendorProductDataTable extends DataTable
   {
     return (new EloquentDataTable($query))
       ->addColumn('Action', function ($query) {
-        $editBtn   = "<a href='" .  route('admin.product.edit',  $query->id) . "' class='btn btn-primary'> <i class='far fa-edit'></i> Edit</a>";
-        $deleteBtn = "<a href='" .  route('admin.product.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
+        $editBtn   = "<a href='" .  route('vendor.products.edit',  $query->id) . "' class='btn btn-primary'> <i class='far fa-edit'></i> Edit</a>";
+        $deleteBtn = "<a href='" .  route('vendor.products.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
         $moreBtn = '<div class="btn-group dropleft">
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-cog"></i>
