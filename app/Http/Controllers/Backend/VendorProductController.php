@@ -91,6 +91,13 @@ class VendorProductController extends Controller
   public function edit(string $id)
   {
     $product = Product::find($id);
+
+    /** Check if it's the owner of the product */
+
+    if ($product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     $categories = Category::all();
     $brands = Brand::all();
 
@@ -108,6 +115,10 @@ class VendorProductController extends Controller
     $validated = $request->validated();
 
     $product = Product::find($id);
+
+    if ($product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
 
     $imagePath  = $this->updateImage($request, 'thumb_image', $this->imageFolder, $product->thumb_image);
     $product->name = $validated['name'];
