@@ -27,15 +27,20 @@ class VendorProductDataTable extends DataTable
       ->addColumn('Action', function ($query) {
         $editBtn   = "<a href='" .  route('vendor.products.edit',  $query->id) . "' class='btn btn-primary'> <i class='far fa-edit'></i> Edit</a>";
         $deleteBtn = "<a href='" .  route('vendor.products.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
-        $moreBtn = '<div class="btn-group dropleft">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-cog"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item has-icon" href="' . route('admin.product_image_gallery.index', ['product' => $query->id]) . '"><i class="far fa-heart"></i> Image Gallery</a>
-                      <a class="dropdown-item has-icon" href="' . route('admin.product_variant.index', ['product' => $query->id]) . '"><i class="far fa-file"></i> Varients</a>
-                    </div>
-                  </div>';
+        $moreBtn = '
+            <div class="btn-group dropstart">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+              </button>
+              <ul class="dropdown-menu">
+                <a class="dropdown-item has-icon" href="' . route('vendor.products-image-gallery.index', ['product' => $query->id]) . '">
+                   Image Gallery
+                </a>
+                <a class="dropdown-item has-icon" href="' . route('vendor.products-image-gallery.index', ['product' => $query->id]) . '">
+                   Varients
+                </a>
+              </ul>
+            </div>';
         return $editBtn . $deleteBtn . $moreBtn;
       })
       ->addColumn('Image', function ($query) {

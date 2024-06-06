@@ -16,6 +16,7 @@ class ProductImageGalleryController extends Controller
   use ImageUploadTrait, ImageDeleteTrait;
 
   protected $imageFolder = 'uploads/products/';
+
   /**
    * Display a listing of the resource.
    */

@@ -3,16 +3,17 @@
 namespace App\DataTables;
 
 use App\Models\ProductImage;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use App\Models\VendorProductImageGallery;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
-class ProductImageDataTable extends DataTable
+class VendorProductImageGalleryDataTable extends DataTable
 {
   /**
    * Build the DataTable class.
@@ -22,13 +23,7 @@ class ProductImageDataTable extends DataTable
   public function dataTable(QueryBuilder $query): EloquentDataTable
   {
     return (new EloquentDataTable($query))
-      ->addColumn('action', function ($query) {
-        return "<a href='" .  route('admin.product_image_gallery.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
-      })
-      ->addColumn('image', function ($query) {
-        return "<img width='150px' src='" . asset($query->image_path) . "'></img>";
-      })
-      ->rawColumns(['image', 'action'])
+      ->addColumn('action', 'vendorproductimagegallery.action')
       ->setRowId('id');
   }
 
@@ -46,7 +41,7 @@ class ProductImageDataTable extends DataTable
   public function html(): HtmlBuilder
   {
     return $this->builder()
-      ->setTableId('productimage-table')
+      ->setTableId('vendorproductimagegallery-table')
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
@@ -69,11 +64,12 @@ class ProductImageDataTable extends DataTable
   {
     return [
       Column::make('id'),
-      Column::make('image'),
+
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
-        ->addClass('text-center')
+        ->width(60)
+        ->addClass('text-center'),
     ];
   }
 
@@ -82,6 +78,6 @@ class ProductImageDataTable extends DataTable
    */
   protected function filename(): string
   {
-    return 'ProductImage_' . date('YmdHis');
+    return 'VendorProductImageGallery_' . date('YmdHis');
   }
 }

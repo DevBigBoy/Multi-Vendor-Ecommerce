@@ -169,4 +169,8 @@ class VendorProductController extends Controller
     $childcategories = SubCategory::find($request->id)->childCategories;
     return $childcategories;
   }
+
+  public function changeStatus()
+  {
+  }
 }

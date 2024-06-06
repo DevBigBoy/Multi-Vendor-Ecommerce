@@ -23,7 +23,7 @@ class StoreProductImagesRequest extends FormRequest
   {
     return [
       'product_id' => ['required', 'exists:products,id'],
-      'images.*' => ['required','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
+      'images.*' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048']
     ];
   }
 }
