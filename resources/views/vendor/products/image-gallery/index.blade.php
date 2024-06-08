@@ -17,8 +17,15 @@
                     <div class="dashboard_content mt-2 mt-md-0">
                         <div class="d-flex align-content-between justify-content-between mb-3">
                             <h3>
-                                <i class="far fa-user"></i> Product Gallery {{ $product->name }}
+                                <i class="fas fa-images"></i> Product: {{ $product->name }}
                             </h3>
+
+                            <div>
+                                <a href="{{ route('vendor.products.index') }}" class="btn btn-success">
+                                    <i class="fas fa-arrow-left"></i>
+                                    Back
+                                </a>
+                            </div>
                         </div>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">

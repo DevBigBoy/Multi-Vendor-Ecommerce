@@ -23,7 +23,13 @@ class VendorProductImageGalleryDataTable extends DataTable
   public function dataTable(QueryBuilder $query): EloquentDataTable
   {
     return (new EloquentDataTable($query))
-      ->addColumn('action', 'vendorproductimagegallery.action')
+      ->addColumn('action', function ($query) {
+        return "<a href='" .  route('vendor.products-image-gallery.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
+      })
+      ->addColumn('image', function ($query) {
+        return "<img width='100px' src='" . asset($query->image_path) . "'></img>";
+      })
+      ->rawColumns(['image', 'action'])
       ->setRowId('id');
   }
 
@@ -64,11 +70,10 @@ class VendorProductImageGalleryDataTable extends DataTable
   {
     return [
       Column::make('id'),
-
+      Column::make('image'),
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
-        ->width(60)
         ->addClass('text-center'),
     ];
   }

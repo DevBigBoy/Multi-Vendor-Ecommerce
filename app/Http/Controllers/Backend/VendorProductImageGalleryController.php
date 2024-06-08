@@ -3,18 +3,25 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Product;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
 use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductImageGalleryDataTable;
+use App\Http\Requests\Vendor\StoreVendorProductImagesRequest;
+use App\Traits\ImageDeleteTrait;
 
 class VendorProductImageGalleryController extends Controller
 {
+  use ImageUploadTrait, ImageDeleteTrait;
+
+  protected $imageFolder = 'uploads/products/';
   /**
    * Display a listing of the resource.
    */
   public function index(Request $request, VendorProductImageGalleryDataTable $vendorProductImageGalleryDataTable)
   {
-    $product = Product::find($request->product);
+    $product = Product::findOrFail($request->product);
     return $vendorProductImageGalleryDataTable->render('vendor.products.image-gallery.index', compact('product'));
   }
 
@@ -29,9 +36,21 @@ class VendorProductImageGalleryController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreVendorProductImagesRequest $request)
   {
-    dd($request->all());
+    $data = $request->validated();
+
+    $imagePaths = $this->uploadMultiImage($request, 'images', $this->imageFolder);
+
+    foreach ($imagePaths as  $imagePath) {
+      ProductImage::create([
+        'product_id' => $data['product_id'],
+        'image_path' => $imagePath
+      ]);
+    }
+
+    toastr()->success('Uploaded Successfully!');
+    return redirect()->back();
   }
 
   /**
@@ -63,6 +82,10 @@ class VendorProductImageGalleryController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $productImage = ProductImage::findOrFail($id);
+    $this->deleteImage($productImage->image_path);
+    $productImage->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 }
