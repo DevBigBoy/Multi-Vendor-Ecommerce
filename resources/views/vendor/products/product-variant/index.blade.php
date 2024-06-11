@@ -32,6 +32,7 @@
                                 </a>
                             </div>
                         </div>
+                        <h5 class="mb-3">Product: {{ $product->name }}</h5>
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
                                 {{ $dataTable->table() }}

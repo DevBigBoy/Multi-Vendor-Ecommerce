@@ -23,7 +23,17 @@ class VendorProductVariantDataTable extends DataTable
   public function dataTable(QueryBuilder $query): EloquentDataTable
   {
     return (new EloquentDataTable($query))
-      ->addColumn('action', 'vendorproductvariant.action')
+      ->addColumn('action', function ($query) {
+        $variantItems   = "<a href='" .  route('admin.product_variant_items.index', ['productId' => $query->product->id, 'variantId' => $query->id]) . "' class='btn btn-info '> <i class='far fa-file'></i> Variant Item</a>";
+        $editBtn   = "<a href='" .  route('admin.product_variant.edit',  $query->id) . "' class='btn btn-primary mx-2'> <i class='far fa-edit'></i> Edit</a>";
+        $deleteBtn = "<a href='" .  route('admin.product_variant.destroy',  $query->id) . "' class='btn btn-danger  delete-item'> <i class='fas fa-trash'></i> Delete</a>";
+
+        return $variantItems . $editBtn . $deleteBtn;
+      })
+      ->addColumn('product_id', function ($query) {
+        return $query->product->name;
+      })
+      ->rawColumns(['product_id', 'action'])
       ->setRowId('id');
   }
 
@@ -64,12 +74,11 @@ class VendorProductVariantDataTable extends DataTable
   {
     return [
       Column::make('id'),
-      Column::make('created_at'),
-      Column::make('updated_at'),
+      Column::make('name'),
+      Column::make('product_id'),
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
-        ->width(60)
         ->addClass('text-center'),
     ];
   }

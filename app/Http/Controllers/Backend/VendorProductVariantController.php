@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\ProductVariant;
 use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductVariantDataTable;
+use App\Http\Requests\Vendor\StoreVendorProductVariantRequest;
 
 class VendorProductVariantController extends Controller
 {
@@ -39,9 +40,15 @@ class VendorProductVariantController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(StoreVendorProductVariantRequest $request)
   {
-    //
+    $variant = $request->validated();
+
+    $this->model::create($variant);
+
+    toastr()->success('Created Successfully!');
+
+    return to_route('vendor.products-variant.index', ['product' => $variant['product_id']]);
   }
 
   /**

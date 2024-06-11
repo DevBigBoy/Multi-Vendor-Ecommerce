@@ -1,6 +1,6 @@
 @extends('vendor.layouts.master')
 
-@section('title', 'Create Products Variant')
+@section('title', 'Create Variant')
 
 
 
@@ -17,19 +17,53 @@
                     <div class="dashboard_content mt-2 mt-md-0">
                         <div class="d-flex align-content-between justify-content-between mb-3">
                             <h3>
-                                <i class="far fa-user"></i>Create Products Variant
+                                <i class="far fa-user"></i> Create Variant
                             </h3>
+                            <h6>Product:{{ $product->name }}</h6>
 
                             <div>
-                                <a href="{{ route('vendor.products.index') }}" class="btn btn-success">
+                                <a href="{{ route('vendor.products-variant.index', ['product' => $product->id]) }}"
+                                    class="btn btn-success">
                                     <i class="fas fa-arrow-left"></i>
                                     Back
                                 </a>
 
                             </div>
                         </div>
+
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
+
+                                <form action="{{ route('vendor.products-variant.store') }}" method="POST">
+                                    @csrf
+
+                                    <input type="hidden" class="form-control" name="product_id"
+                                        value="{{ $product->id }}">
+
+
+                                    <div class="form-group mb-4 col-lg-6">
+                                        <label class="col-form-label">Name</label>
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ old('name') }}">
+                                    </div>
+
+
+                                    <div class="form-group mb-4 col-lg-6">
+                                        <label for="status">Status</label>
+                                        <select id="status" class="form-control " name="status">
+                                            <option value="">Select</option>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary">Create Product</button>
+
+
+
+                                </form>
+
                             </div>
                         </div>
                     </div>
@@ -42,33 +76,4 @@
 
 
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            $('body').on('click', '.change-status', function() {
-
-                let isChecked = $(this).is(':checked');
-                let id = $(this).data('id');
-
-                $.ajax({
-                    url: "{{ route('admin.product.changestatus') }}",
-                    method: 'PUT',
-                    data: {
-                        isChecked: isChecked,
-                        id: id
-                    },
-                    success: function(response) {
-                        if (response.status === 'success') {
-                            toastr.success(response.message);
-                        } else if (response.status === 'error') {
-                            toastr.error(response.message);
-                        }
-                    },
-
-                    error: function(error) {
-                        console.error(error);
-                    }
-                })
-            })
-        })
-    </script>
 @endpush
