@@ -19,7 +19,7 @@
                             <h3>
                                 <i class="far fa-user"></i> Create Variant
                             </h3>
-                            <h6>Product:{{ $product->name }}</h6>
+
 
                             <div>
                                 <a href="{{ route('vendor.products-variant.index', ['product' => $product->id]) }}"

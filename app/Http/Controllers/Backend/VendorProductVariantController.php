@@ -8,6 +8,7 @@ use App\Models\ProductVariant;
 use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductVariantDataTable;
 use App\Http\Requests\Vendor\StoreVendorProductVariantRequest;
+use Illuminate\Support\Facades\Auth;
 
 class VendorProductVariantController extends Controller
 {
@@ -24,6 +25,14 @@ class VendorProductVariantController extends Controller
    */
   public function index(Request $request, VendorProductVariantDataTable $vendorProductVariantDataTable)
   {
+    ProductVariant::where('product_id', request()->product)->get()->each(
+      function ($variant) {
+        if ($variant->product->vendor_id != Auth::user()->vendor->id) {
+          abort(404);
+        }
+      }
+    );
+
     $product = Product::findOrFail($request->product);
     return $vendorProductVariantDataTable->render('vendor.products.product-variant.index', compact('product'));
   }

@@ -3,15 +3,16 @@
 namespace App\DataTables;
 
 use App\Models\ProductVariant;
-use App\Models\VendorProductVariant;
-use Illuminate\Database\Eloquent\Builder as QueryBuilder;
-use Yajra\DataTables\EloquentDataTable;
-use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
+use App\Models\VendorProductVariant;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Yajra\DataTables\Html\Builder as HtmlBuilder;
+use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 
 class VendorProductVariantDataTable extends DataTable
 {
@@ -24,16 +25,34 @@ class VendorProductVariantDataTable extends DataTable
   {
     return (new EloquentDataTable($query))
       ->addColumn('action', function ($query) {
-        $variantItems   = "<a href='" .  route('admin.product_variant_items.index', ['productId' => $query->product->id, 'variantId' => $query->id]) . "' class='btn btn-info '> <i class='far fa-file'></i> Variant Item</a>";
-        $editBtn   = "<a href='" .  route('admin.product_variant.edit',  $query->id) . "' class='btn btn-primary mx-2'> <i class='far fa-edit'></i> Edit</a>";
-        $deleteBtn = "<a href='" .  route('admin.product_variant.destroy',  $query->id) . "' class='btn btn-danger  delete-item'> <i class='fas fa-trash'></i> Delete</a>";
+        $variantItems   = "<a href='" .  route('vendor.products-variant.index', ['productId' => $query->product->id, 'variantId' => $query->id]) . "' class='btn btn-info '> <i class='far fa-file'></i> Variant Item</a>";
+        $editBtn   = "<a href='" .  route('vendor.products-variant.edit',  $query->id) . "' class='btn btn-primary mx-2'> <i class='far fa-edit'></i> Edit</a>";
+        $deleteBtn = "<a href='" .  route('vendor.products-variant.destroy',  $query->id) . "' class='btn btn-danger  delete-item'> <i class='fas fa-trash'></i> Delete</a>";
 
         return $variantItems . $editBtn . $deleteBtn;
       })
-      ->addColumn('product_id', function ($query) {
-        return $query->product->name;
+
+      ->addColumn('status', function ($query) {
+        if ($query->status == 1) {
+
+
+          $button = '
+              <div class="form-check form-switch">
+                <input class="form-check-input change-status" checked type="checkbox" data-id="' . $query->id . '" id="flexSwitchCheckDefault">
+              </div>
+           ';
+        } elseif ($query->status == 0) {
+
+
+          $button = '
+          <div class="form-check form-switch">
+            <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" id="flexSwitchCheckDefault" >
+          </div>
+       ';
+        }
+        return $button;
       })
-      ->rawColumns(['product_id', 'action'])
+      ->rawColumns(['status', 'action'])
       ->setRowId('id');
   }
 
@@ -55,7 +74,7 @@ class VendorProductVariantDataTable extends DataTable
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
-      ->orderBy(1)
+      ->orderBy(0)
       ->selectStyleSingle()
       ->buttons([
         Button::make('excel'),
@@ -75,7 +94,7 @@ class VendorProductVariantDataTable extends DataTable
     return [
       Column::make('id'),
       Column::make('name'),
-      Column::make('product_id'),
+      Column::make('status'),
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
