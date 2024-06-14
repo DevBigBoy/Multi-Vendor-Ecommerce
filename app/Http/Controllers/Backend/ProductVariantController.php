@@ -63,7 +63,8 @@ class ProductVariantController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $product = $this->model::findOrFail($id);
+    return view('admin.product.variant.edit', compact('product'));
   }
 
   /**

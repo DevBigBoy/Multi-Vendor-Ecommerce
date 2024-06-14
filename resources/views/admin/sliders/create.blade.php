@@ -1,12 +1,14 @@
 @extends('admin.layouts.master')
 
+@section('title', 'Create Slider')
+
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Slider</h1>
+            <h1>Sliders</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.slider.index') }}">Slider</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.sliders.index') }}">Sliders</a></div>
                 <div class="breadcrumb-item">Create</div>
             </div>
         </div>
@@ -19,11 +21,18 @@
                             <h4>Create Slider</h4>
                         </div>
                         <div class="card-body col-9">
-                            <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.sliders.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group">
-                                    <label>Banner</label>
-                                    <input type="file" class="form-control" name="banner">
+
+                                <div class="form-group mb-4">
+                                    <label class="col-form-label">Banner</label>
+                                    <div class="col-sm-12">
+                                        <div id="image-preview" class="image-preview"
+                                            style="width: 100%; height: 400px; background-size: cover;">
+                                            <label for="image-upload" id="image-label">Choose Slider</label>
+                                            <input type="file" name="banner" id="image-upload" />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -55,7 +64,7 @@
                                 <div class="form-group">
                                     <label for="status">Status</label>
                                     <select id="status" class="form-control" name="status">
-                                        <option value="1" selected="">Active</option>
+                                        <option value="1" selected>Active</option>
                                         <option value="0">Inactive</option>
                                     </select>
                                 </div>

@@ -11,8 +11,14 @@
                                         <div class="wsus__single_slider_text">
                                             <h3>{!! $slider->type !!}</h3>
                                             <h1>{!! $slider->title !!}</h1>
-                                            <h6>start at ${{ $slider->starting_price }}</h6>
-                                            <a class="common_btn" href="{{ $slider->btn_url }}">shop now</a>
+
+                                            @if ($slider->starting_price)
+                                                <h6>start at {{ $slider->starting_price }}</h6>
+                                            @endif
+
+                                            @if ($slider->btn_url)
+                                                <a class="common_btn" href="{{ $slider->btn_url }}">shop now</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

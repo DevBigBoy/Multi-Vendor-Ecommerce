@@ -22,13 +22,13 @@ class CreateSliderRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'banner' => ['required', 'mimes:png,jpg', 'max:2048'],
-      'type' => ['string', 'max:255'],
-      'title' => ['required', 'string', 'max:255'],
-      'starting_price' => ['max:200'],
-      'btn_url' => ['url'],
-      'serial' => ['required', 'integer'],
-      'status' => ['required'],
+      'banner' => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+      'type' => ['nullable', 'string', 'max:100'],
+      'title' => ['nullable', 'string', 'max:255'],
+      'starting_price' => ['nullable', 'string'],
+      'btn_url' => ['nullable', 'url'],
+      'serial' => ['nullable', 'integer'],
+      'status' => ['required', 'boolean'],
     ];
   }
 }

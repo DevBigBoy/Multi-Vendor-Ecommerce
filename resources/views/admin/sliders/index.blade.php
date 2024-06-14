@@ -1,14 +1,14 @@
 @extends('admin.layouts.master')
-@section('title', 'Slider')
+@section('title', 'Sliders')
 
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Slider</h1>
+            <h1>Sliders</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="{{ route('admin.dashboard') }}">Dashboard</a></div>
-                <div class="breadcrumb-item"><a href="{{ route('admin.slider.index') }}">Sliders</a></div>
-                <div class="breadcrumb-item">Show</div>
+                <div class="breadcrumb-item"><a href="{{ route('admin.sliders.index') }}">Sliders</a></div>
+                <div class="breadcrumb-item">All</div>
             </div>
         </div>
 
@@ -19,7 +19,7 @@
                         <div class="card-header">
                             <h4>All Sliders</h4>
                             <div class="card-header-action">
-                                <a href="{{ route('admin.slider.create') }}" class="btn btn-icon icon-left btn-primary">
+                                <a href="{{ route('admin.sliders.create') }}" class="btn btn-icon icon-left btn-primary">
                                     <i class="far fa-edit"></i> Create New
                                 </a>
                             </div>

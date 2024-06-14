@@ -23,8 +23,8 @@ class SliderDataTable extends DataTable
   {
     return (new EloquentDataTable($query))
       ->addColumn('action', function ($query) {
-        $editBtn   = "<a href='" .  route('admin.slider.edit',  $query->id) . "' class='btn btn-primary'> <i class='far fa-edit'></i> Edit</a>";
-        $deleteBtn = "<a href='" .  route('admin.slider.destroy',  $query->id) . "' class='btn btn-danger ml-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
+        $editBtn   = "<a href='" .  route('admin.sliders.edit',  $query->id) . "' class='btn btn-primary'> <i class='far fa-edit'></i> Edit</a>";
+        $deleteBtn = "<a href='" .  route('admin.sliders.destroy',  $query->id) . "' class='btn btn-danger ml-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
         return $editBtn . $deleteBtn;
       })
       ->addColumn('banner', function ($query) {
@@ -81,11 +81,13 @@ class SliderDataTable extends DataTable
       Column::make('banner')->width(200),
       Column::make('title'),
       Column::make('type'),
+      Column::make('starting_price'),
       Column::make('status'),
       Column::make('serial'),
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
+        ->width(400)
         ->addClass('text-center'),
     ];
   }

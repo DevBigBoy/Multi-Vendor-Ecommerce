@@ -14,14 +14,17 @@ use Illuminate\Http\Request;
 
 class SliderController extends Controller
 {
-  use ImageUploadTrait;
-  use ImageDeleteTrait;
+  use ImageUploadTrait, ImageDeleteTrait;
+
   /**
    * Display a listing of the resource.
    */
+
+  private $imageFolder = 'uploads/sliders/';
+
   public function index(SliderDataTable $dataTable)
   {
-    return $dataTable->render('admin.slider.index');
+    return $dataTable->render('admin.sliders.index');
   }
 
   /**
@@ -29,30 +32,27 @@ class SliderController extends Controller
    */
   public function create()
   {
-    return view('admin.slider.create');
+    return view('admin.sliders.create');
   }
 
   /**
    * Store a newly created resource in storage.
    */
+
   public function store(CreateSliderRequest $request): RedirectResponse
   {
-    $slider = new Slider();
-    /** handle file upload */
-    $imagePath =  $this->uploadImage($request, 'banner', 'uploads/sliders/');
 
-    $slider->banner = $imagePath;
-    $slider->type = $request->type;
-    $slider->title = $request->title;
-    $slider->starting_price = $request->starting_price;
-    $slider->btn_url = $request->btn_url;
-    $slider->serial = $request->serial;
-    $slider->status = $request->status;
+    $data = $request->except('banner');
 
-    $slider->save();
+    if ($request->hasFile('banner')) {
+      $imagePath =  $this->uploadImage($request, 'banner', $this->imageFolder);
+      $data['banner'] = $imagePath;
+    }
 
-    toastr()->success('Created Successfully!');
-    return back();
+    Slider::create($data);
+
+    toastr()->success('Slider Created Successfully!');
+    return redirect()->route('admin.sliders.index');
   }
 
   /**
@@ -69,7 +69,7 @@ class SliderController extends Controller
   public function edit(string $id)
   {
     $slider = Slider::findOrFail($id);
-    return view('admin.slider.edite', ['slider' => $slider]);
+    return view('admin.sliders.edit', ['slider' => $slider]);
   }
 
   /**
@@ -79,19 +79,15 @@ class SliderController extends Controller
   {
     $slider = Slider::findOrFail($id);
 
-    $imagePath =  $this->updateImage($request, 'banner', 'uploads/sliders/', $slider->banner);
+    $data = $request->except('banner');
 
-    $slider->banner = empty(!$imagePath) ? $imagePath : $slider->banner;
-    $slider->type = $request->type;
-    $slider->title = $request->title;
-    $slider->starting_price = $request->starting_price;
-    $slider->btn_url = $request->btn_url;
-    $slider->serial = $request->serial;
-    $slider->status = $request->status;
-    $slider->save();
+    $imagePath =  $this->updateImage($request, 'banner', $this->imageFolder, $slider->banner);
+    $data['banner'] = $imagePath ?? $slider->banner;
+
+    $slider->update($data);
 
     toastr()->success('Updated Successfully!');
-    return redirect()->route('admin.slider.index');
+    return redirect()->route('admin.sliders.index');
   }
 
   /**
