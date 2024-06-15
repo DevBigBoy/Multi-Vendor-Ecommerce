@@ -8,6 +8,7 @@ use App\Models\ProductVariant;
 use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductVariantDataTable;
 use App\Http\Requests\Vendor\StoreVendorProductVariantRequest;
+use App\Http\Requests\Vendor\UpdateVendorProductVariantRequest;
 use Illuminate\Support\Facades\Auth;
 
 class VendorProductVariantController extends Controller
@@ -73,22 +74,29 @@ class VendorProductVariantController extends Controller
    */
   public function edit(string $id)
   {
-    //
+    $variant =  $this->model::findOrFail($id);
+    return view('vendor.products.product-variant.edit', compact('variant'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, string $id)
+  public function update(UpdateVendorProductVariantRequest $request, string $id)
   {
-    //
+
+    $variant = $this->model::findOrFail($id);
+
+    $newVariant = $request->validated();
+
+    $variant->update($newVariant);
+
+    toastr()->success('Updated Successfully!');
+
+    return to_route('vendor.products-variant.index', ['product' => $variant->product_id]);
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
-  {
-    //
-  }
+  public function destroy(string $id) {}
 }
