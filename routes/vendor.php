@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProfileController;
 use App\Http\Controllers\Backend\VendorShopProfileController;
+use App\Http\Controllers\Backend\ProductVariantItemController;
+use App\Http\Controllers\Backend\VendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductImageGalleryController;
 
 /**
@@ -32,3 +34,10 @@ Route::resource('products', VendorProductController::class);
  * Product Image Gallery
  **/
 Route::resource('products-image-gallery', VendorProductImageGalleryController::class);
+
+/**
+ * Product Variant routes
+ **/
+
+Route::put('products-variant/changestatus', [VendorProductVariantController::class, 'changeStatus'])->name('products-variant.changestatus');
+Route::resource('products-variant', VendorProductVariantController::class);
