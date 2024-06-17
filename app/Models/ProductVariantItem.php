@@ -11,7 +11,11 @@ class ProductVariantItem extends Model
   use HasFactory;
 
   protected $fillable = [
-    'variant_id', 'name', 'price', 'is_default', 'status'
+    'variant_id',
+    'name',
+    'price',
+    'is_default',
+    'status'
   ];
 
 

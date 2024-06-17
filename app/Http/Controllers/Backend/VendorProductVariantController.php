@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductVariantDataTable;
 use App\Http\Requests\Vendor\StoreVendorProductVariantRequest;
 use App\Http\Requests\Vendor\UpdateVendorProductVariantRequest;
+use App\Models\ProductVariantItem;
 use Illuminate\Support\Facades\Auth;
 
 class VendorProductVariantController extends Controller
@@ -98,5 +99,22 @@ class VendorProductVariantController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id) {}
+  public function destroy(string $id)
+  {
+    if (ProductVariantItem::where('variant_id', $id)->count() > 0) {
+      return response(['status' => 'error', 'message' => 'This Variant Has items please delete it first']);
+    }
+
+    $this->model::destroy($id);
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+  }
+
+  public function changeStatus(Request $request)
+  {
+    $variant = $this->model::findOrFail($request->id);
+    $variant->status = $request->isChecked == 'true' ? 1 : 0;
+    $variant->save();
+
+    return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);
+  }
 }
