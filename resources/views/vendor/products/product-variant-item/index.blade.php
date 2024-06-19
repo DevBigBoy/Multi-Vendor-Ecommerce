@@ -34,7 +34,7 @@
                         </div>
 
                         <h5 class="mb-3">Product: {{ $product->name }}</h5>
-                        <h5 class="mb-3">For Variant: {{ $variant->name }}</h5>
+                        <h5 class="mb-3">Variant: {{ $variant->name }}</h5>
 
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">

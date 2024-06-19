@@ -1,6 +1,6 @@
 @extends('vendor.layouts.master')
 
-@section('title', 'Create Variant Items')
+@section('title', 'Create Variant Item')
 
 @section('content') <!--=============================DASHBOARD START==============================-->
     <section id="wsus__dashboard">
@@ -14,12 +14,12 @@
                     <div class="dashboard_content mt-2 mt-md-0">
                         <div class="d-flex align-content-between justify-content-between mb-3">
                             <h3>
-                                <i class="far fa-user"></i> Create Product Variant Item
+                                <i class="far fa-user"></i> Create Variant Item
                             </h3>
 
 
                             <div>
-                                <a href="{{ route('vendor.products-variant.index', ['product' => $product->id]) }}"
+                                <a href="{{ route('vendor.products-variant-item.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
                                     class="btn btn-success">
                                     <i class="fas fa-arrow-left"></i>
                                     Back
@@ -31,7 +31,7 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 
-                                <form action="{{ route('vendor.products-variant-item.create') }}" method="POST">
+                                <form action="{{ route('vendor.products-variant-item.store') }}" method="POST">
                                     @csrf
 
                                     <input type="hidden" name="variant_id" value="{{ $variant->id }}">
@@ -40,29 +40,28 @@
 
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Variant Name</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="variant_name"
-                                                value="{{ $variant->name }}" readonly>
-                                        </div>
+
+                                        <input type="text" class="form-control" name="variant_name"
+                                            value="{{ $variant->name }}" readonly>
+
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Item Name</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="name"
-                                                value="{{ old('name') }}">
-                                        </div>
-                                    </div>
 
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ old('name') }}">
+                                    </div>
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Price <code>(Set 0 for make it free)</code></label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="price"
-                                                value="{{ old('price') }}">
-                                        </div>
+
+                                        <input type="text" class="form-control" name="price"
+                                            value="{{ old('price') }}">
+
                                     </div>
 
-                                    <div class="form-group col-md-10  mb-4">
+
+                                    <div class="form-group  mb-4">
                                         <label for="status">Is Default</label>
                                         <select id="status" class="form-control " name="is_default">
                                             <option value="">Select</option>
@@ -71,9 +70,9 @@
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-10  mb-4">
+                                    <div class="form-group  mb-4">
                                         <label for="status">Status</label>
-                                        <select id="status" class="form-control " name="status">
+                                        <select id="status" class="form-control" name="status">
                                             <option value="">Select</option>
                                             <option value="1">Active</option>
                                             <option value="0">Inactive</option>
@@ -81,9 +80,9 @@
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <div class="col-md-10">
-                                            <button type="submit" class="btn btn-primary">Create Item</button>
-                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Create Item</button>
+
                                     </div>
 
                                 </form>
