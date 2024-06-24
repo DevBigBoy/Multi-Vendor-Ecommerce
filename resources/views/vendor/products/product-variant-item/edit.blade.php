@@ -19,7 +19,7 @@
 
 
                             <div>
-                                <a href="{{ route('vendor.products-variant-item.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
+                                <a href="{{ route('vendor.products-variant-item.index', ['productId' => $variantItem->productVariant->product_id, 'variantId' => $variantItem->productVariant->id]) }}"
                                     class="btn btn-success">
                                     <i class="fas fa-arrow-left"></i>
                                     Back
@@ -31,63 +31,64 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
 
-                                <form action="{{ route('vendor.products-variant-item.update') }}" method="POST">
+                                <form action="{{ route('vendor.products-variant-item.update', $variantItem->id) }}"
+                                    method="POST">
                                     @csrf
                                     @method('PUT')
 
-                                    <input type="hidden" name="variant_id" value="{{ $variant->id }}">
+                                    <input type="hidden" name="variant_id" value="{{ $variantItem->productVariant->id }}">
 
-                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="product_id"
+                                        value="{{ $variantItem->productVariant->product_id }}">
 
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Variant Name</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="variant_name"
-                                                value="{{ $variant->name }}" readonly>
-                                        </div>
+
+                                        <input type="text" class="form-control" name="variant_name"
+                                            value="{{ $variantItem->productVariant->name }}" readonly>
+
                                     </div>
 
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Item Name</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="name"
-                                                value="{{ old('name') }}">
-                                        </div>
-                                    </div>
 
+                                        <input type="text" class="form-control" name="name"
+                                            value="{{ $variantItem->name }}">
+                                    </div>
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Price <code>(Set 0 for make it free)</code></label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" name="price"
-                                                value="{{ old('price') }}">
-                                        </div>
+
+                                        <input type="text" class="form-control" name="price"
+                                            value="{{ $variantItem->price }}">
+
                                     </div>
 
-                                    <div class="form-group col-md-10  mb-4">
+
+                                    <div class="form-group  mb-4">
                                         <label for="status">Is Default</label>
                                         <select id="status" class="form-control " name="is_default">
-                                            <option value="">Select</option>
-                                            <option value="1">Yes</option>
-                                            <option value="0">No</option>
+                                            <option value="1" @selected($variantItem->is_default == 1)>Yes
+                                            </option>
+                                            <option value="0" @selected($variantItem->is_default == 0)>No</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-md-10  mb-4">
+                                    <div class="form-group  mb-4">
                                         <label for="status">Status</label>
-                                        <select id="status" class="form-control " name="status">
-                                            <option value="">Select</option>
-                                            <option value="1">Active</option>
-                                            <option value="0">Inactive</option>
+                                        <select id="status" class="form-control" name="status">
+                                            <option value="1" @selected($variantItem->status == 1)>Active</option>
+                                            <option value="0" @selected($variantItem->status == 0)>Inactive</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group mb-4">
-                                        <div class="col-md-10">
-                                            <button type="submit" class="btn btn-primary">Create Item</button>
-                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Update</button>
+
                                     </div>
 
                                 </form>
+
 
                             </div>
                         </div>

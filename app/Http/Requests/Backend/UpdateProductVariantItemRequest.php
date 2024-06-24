@@ -22,10 +22,12 @@ class UpdateProductVariantItemRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'name' => ['nullable', 'string', 'max:255'],
-      'price' => ['nullable', 'integer'],
-      'is_default' => ['nullable', 'boolean'],
-      'status' => ['nullable', 'boolean'],
+      'product_id' => ['required', 'exists:products,id'],
+      'variant_id' => ['required', 'exists:product_variants,id'],
+      'name' => ['required', 'string', 'max:255'],
+      'price' => ['required', 'integer'],
+      'is_default' => ['required', 'boolean'],
+      'status' => ['required', 'boolean'],
     ];
   }
 }
