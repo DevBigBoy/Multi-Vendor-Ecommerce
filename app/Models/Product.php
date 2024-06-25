@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\ImageDeleteTrait;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File;
 
 class Product extends Model
 {
-  use HasFactory;
+  use HasFactory, ImageDeleteTrait;
 
   protected $fillable = [
     'name',
@@ -60,7 +62,20 @@ class Product extends Model
     return $this->hasMany(ProductVariant::class);
   }
 
-  public function scopeFilter(Builder $builder, $filters)
+  protected static function booted()
   {
+    static::deleting(
+      function ($product) {
+        // Delete all images associated with the product
+        foreach ($product->productImages as $image) {
+          File::delete(public_path($image->image_path));
+        }
+        // Delete all variants and their items
+        foreach ($product->productVariants as $variant) {
+          $variant->productVariantItems()->delete();
+        }
+        $product->productVariants()->delete();
+      }
+    );
   }
 }

@@ -154,20 +154,25 @@ class ProductController extends Controller
     $this->deleteImage($product->thumb_image);
 
     /** Delete Product Related Images */
-    $productImages = ProductImage::where('product_id', $product->id)->get();
-    foreach ($productImages as $productImage) {
-      $this->deleteImage($productImage->image_path);
-      $productImage->delete();
-    }
+    // $productImages = ProductImage::where('product_id', $product->id)->get();
+    // foreach ($productImages as $productImage) {
+    //   $this->deleteImage($productImage->image_path);
+    //   $productImage->delete();
+    // }
 
     /**Delete Product Variants */
-    $productVariants = ProductVariant::where('product_id', $product->id)->get();
-    foreach ($productVariants as $productVariant) {
-      $productVariant->productVariantItems()->delete();
-      $productVariant->delete();
-    }
+    // $productVariants = ProductVariant::where('product_id', $product->id)->get();
+    // foreach ($productVariants as $productVariant) {
+    //   $productVariant->productVariantItems()->delete();
+    //   $productVariant->delete();
+    // }
+
+    // $product->delete();
+
+    $this->deleteImage($product->thumb_image);
 
     $product->delete();
+
 
     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }

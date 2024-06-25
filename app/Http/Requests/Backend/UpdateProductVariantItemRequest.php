@@ -22,8 +22,6 @@ class UpdateProductVariantItemRequest extends FormRequest
   public function rules(): array
   {
     return [
-      'product_id' => ['required', 'exists:products,id'],
-      'variant_id' => ['required', 'exists:product_variants,id'],
       'name' => ['required', 'string', 'max:255'],
       'price' => ['required', 'integer'],
       'is_default' => ['required', 'boolean'],

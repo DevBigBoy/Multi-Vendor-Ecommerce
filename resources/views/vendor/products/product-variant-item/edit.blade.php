@@ -36,10 +36,6 @@
                                     @csrf
                                     @method('PUT')
 
-                                    <input type="hidden" name="variant_id" value="{{ $variantItem->productVariant->id }}">
-
-                                    <input type="hidden" name="product_id"
-                                        value="{{ $variantItem->productVariant->product_id }}">
 
                                     <div class="form-group mb-4">
                                         <label class="col-form-label">Variant Name</label>

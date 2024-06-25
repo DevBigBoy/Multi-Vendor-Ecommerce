@@ -15,15 +15,24 @@ use Illuminate\Support\Facades\Auth;
 use App\DataTables\VendorProductDataTable;
 use App\Http\Requests\Vendor\StoreVendorProductRequest;
 use App\Http\Requests\Vendor\UpdateVendorProductRequest;
+use App\Traits\ImageDeleteTrait;
 
 class VendorProductController extends Controller
 {
-  use ImageUploadTrait;
+  use ImageUploadTrait, ImageDeleteTrait;
+
+  protected $product;
 
   protected $imageFolder = 'uploads/products/';
   /**
    * Display a listing of the resource.
    */
+
+  public function __construct(Product $product)
+  {
+    $this->product = $product;
+  }
+
   public function index(VendorProductDataTable $dataTable)
   {
     return $dataTable->render('vendor.products.index');
@@ -154,7 +163,19 @@ class VendorProductController extends Controller
    */
   public function destroy(string $id)
   {
-    //
+    $product = $this->product::findOrFail($id);
+
+    $this->deleteImage($product->thumb_image);
+    // Delete all product's images
+    // if (count($product->productImages) > 0) {
+    //   foreach ($product->productImages as $image) {
+    //     $this->deleteImage($image->image_path);
+    //   }
+    // }
+
+    $product->delete();
+
+    return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 
 
@@ -170,7 +191,11 @@ class VendorProductController extends Controller
     return $childcategories;
   }
 
-  public function changeStatus()
+  public function changeStatus(Request $request)
   {
+    $product  = $this->product::findOrFail($request->id);
+    $product->status = $request->isChecked == 'true' ? 1 : 0;
+    $product->save();
+    return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);
   }
 }

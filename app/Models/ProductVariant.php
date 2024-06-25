@@ -12,7 +12,9 @@ class ProductVariant extends Model
   use HasFactory;
 
   protected $fillable = [
-    'product_id', 'name', 'status',
+    'product_id',
+    'name',
+    'status',
   ];
 
   public function product()
@@ -24,5 +26,13 @@ class ProductVariant extends Model
   public function productVariantItems()
   {
     return $this->hasMany(ProductVariantItem::class, 'variant_id');
+  }
+
+  protected static function booted()
+  {
+    static::deleting(function ($variant) {
+      // Delete all items associated with this variant
+      $variant->productVariantItems()->delete();
+    });
   }
 }

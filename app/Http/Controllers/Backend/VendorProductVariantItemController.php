@@ -78,7 +78,7 @@ class VendorProductVariantItemController extends Controller
 
   public function changeStatus(Request $request)
   {
-    $item = $this->model::find($request->id);
+    $item = $this->model::findOrFail($request->id);
     $item->status = $request->isChecked == 'true' ? 1 : 0;
     $item->save();
     return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);

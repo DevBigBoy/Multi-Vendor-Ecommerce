@@ -80,7 +80,7 @@ class VendorProductVariantItemDataTable extends DataTable
       ->columns($this->getColumns())
       ->minifiedAjax()
       //->dom('Bfrtip')
-      ->orderBy(1)
+      ->orderBy(0)
       ->selectStyleSingle()
       ->buttons([
         Button::make('excel'),
