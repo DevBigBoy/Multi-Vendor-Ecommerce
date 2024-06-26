@@ -44,17 +44,21 @@ class VendorProductDataTable extends DataTable
         return $editBtn . $deleteBtn . $moreBtn;
       })
       ->addColumn('Image', function ($query) {
-        return "<img width='100px' src='" . asset($query->thumb_image) . "'></img>";
+        return "<img height='90px' src='" . asset($query->thumb_image) . "'></img>";
       })
       ->addColumn('category', function ($query) {
         return $query->category->name;
       })
-
+      ->addColumn('is_approved', function ($query) {
+        if ($query->is_approved == 1) {
+          return "<span class='badge bg-success'>Approved</span>";
+        } elseif ($query->is_approved == 0) {
+          return "<span class='badge bg-danger'>Pending</span>";
+        }
+      })
       ->addColumn('subcategory', function ($query) {
         return $query->subcategory->name;
       })
-
-
       ->addColumn('Product Type', function ($query) {
         switch ($query->product_type) {
           case 'new_arrival':
@@ -98,7 +102,7 @@ class VendorProductDataTable extends DataTable
         }
         return $button;
       })
-      ->rawColumns(['Action', 'Image', 'Product Type', 'Status'])
+      ->rawColumns(['Action', 'Image', 'is_approved', 'Product Type', 'Status'])
       ->setRowId('id');
   }
 
@@ -139,11 +143,10 @@ class VendorProductDataTable extends DataTable
   {
     return [
       Column::make('id'),
-      Column::make('name')
-        ->width(400),
+      Column::make('name'),
       Column::make('price'),
-      Column::make('Image')
-        ->width(150),
+      Column::make('is_approved'),
+      Column::make('Image'),
       Column::make('Product Type'),
       Column::make('Status'),
       Column::make('category'),
@@ -151,7 +154,6 @@ class VendorProductDataTable extends DataTable
       Column::computed('Action')
         ->exportable(false)
         ->printable(false)
-        ->width(300)
         ->addClass('text-center'),
     ];
   }

@@ -163,7 +163,12 @@ class VendorProductController extends Controller
    */
   public function destroy(string $id)
   {
+
     $product = $this->product::findOrFail($id);
+
+    if ($product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
 
     $this->deleteImage($product->thumb_image);
     // Delete all product's images
@@ -194,6 +199,10 @@ class VendorProductController extends Controller
   public function changeStatus(Request $request)
   {
     $product  = $this->product::findOrFail($request->id);
+
+    if ($product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
     $product->status = $request->isChecked == 'true' ? 1 : 0;
     $product->save();
     return response(['status' => 'success', 'message' => 'Status Updated Successfully!']);

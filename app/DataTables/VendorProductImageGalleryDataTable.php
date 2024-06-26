@@ -27,7 +27,7 @@ class VendorProductImageGalleryDataTable extends DataTable
         return "<a href='" .  route('vendor.products-image-gallery.destroy',  $query->id) . "' class='btn btn-danger mx-2 delete-item'> <i class='fas fa-trash'></i> Delete</a>";
       })
       ->addColumn('image', function ($query) {
-        return "<img width='100px' src='" . asset($query->image_path) . "'></img>";
+        return "<img height='150px' src='" . asset($query->image_path) . "'></img>";
       })
       ->rawColumns(['image', 'action'])
       ->setRowId('id');
