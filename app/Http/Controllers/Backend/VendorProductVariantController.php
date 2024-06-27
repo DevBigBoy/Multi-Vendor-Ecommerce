@@ -27,15 +27,12 @@ class VendorProductVariantController extends Controller
    */
   public function index(Request $request, VendorProductVariantDataTable $vendorProductVariantDataTable)
   {
-    ProductVariant::where('product_id', request()->product)->get()->each(
-      function ($variant) {
-        if ($variant->product->vendor_id != Auth::user()->vendor->id) {
-          abort(404);
-        }
-      }
-    );
-
     $product = Product::findOrFail($request->product);
+
+    if ($product->vendor_id !== Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     return $vendorProductVariantDataTable->render('vendor.products.product-variant.index', compact('product'));
   }
 
@@ -76,6 +73,11 @@ class VendorProductVariantController extends Controller
   public function edit(string $id)
   {
     $variant =  $this->model::findOrFail($id);
+
+    if ($variant->product->vendor_id !== Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     return view('vendor.products.product-variant.edit', compact('variant'));
   }
 

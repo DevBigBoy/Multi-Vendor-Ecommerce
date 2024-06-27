@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\DataTables\VendorProductImageGalleryDataTable;
 use App\Http\Requests\Vendor\StoreVendorProductImagesRequest;
 use App\Traits\ImageDeleteTrait;
+use Illuminate\Support\Facades\Auth;
 
 class VendorProductImageGalleryController extends Controller
 {
@@ -22,6 +23,11 @@ class VendorProductImageGalleryController extends Controller
   public function index(Request $request, VendorProductImageGalleryDataTable $vendorProductImageGalleryDataTable)
   {
     $product = Product::findOrFail($request->product);
+
+    if ($product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     return $vendorProductImageGalleryDataTable->render('vendor.products.image-gallery.index', compact('product'));
   }
 
@@ -82,7 +88,13 @@ class VendorProductImageGalleryController extends Controller
    */
   public function destroy(string $id)
   {
+
     $productImage = ProductImage::findOrFail($id);
+
+    if ($productImage->product->vendor_id != Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     $this->deleteImage($productImage->image_path);
     $productImage->delete();
 
