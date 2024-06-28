@@ -57,6 +57,7 @@ class VendorProductVariantItemController extends Controller
   public function edit($variantItemId)
   {
     $variantItem = $this->model::findOrFail($variantItemId);
+
     return view('vendor.products.product-variant-item.edit', compact('variantItem'));
   }
 

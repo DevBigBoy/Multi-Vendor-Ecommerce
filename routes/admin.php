@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TempImageController;
@@ -71,3 +72,11 @@ Route::post('product_variant_items', [ProductVariantItemController::class, 'stor
 Route::get('product_variant_items_edit/{variantItemId}', [ProductVariantItemController::class, 'edit'])->name('product_variant_items.edit');
 Route::put('product_variant_items_edit/{variantItemId}', [ProductVariantItemController::class, 'update'])->name('product_variant_items.update');
 Route::delete('product_variant_items/{variantItemId}', [ProductVariantItemController::class, 'destroy'])->name('product_variant_items.destroy');
+
+
+
+/**
+ * Seller Products Routes
+ */
+
+Route::get('seller-products', [SellerProductController::class, 'index'])->name('seller-products.index');

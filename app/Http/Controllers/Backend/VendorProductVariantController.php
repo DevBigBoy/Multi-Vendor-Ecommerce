@@ -89,6 +89,10 @@ class VendorProductVariantController extends Controller
 
     $variant = $this->model::findOrFail($id);
 
+    if ($variant->product->vendor_id !== Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     $newVariant = $request->validated();
 
     $variant->update($newVariant);
@@ -103,11 +107,17 @@ class VendorProductVariantController extends Controller
    */
   public function destroy(string $id)
   {
+    $variant = $this->model::findOrFail($id);
+
+    if ($variant->product->vendor_id !== Auth::user()->vendor->id) {
+      abort(404);
+    }
+
     if (ProductVariantItem::where('variant_id', $id)->count() > 0) {
       return response(['status' => 'error', 'message' => 'This Variant Has items please delete it first']);
     }
 
-    $this->model::destroy($id);
+    $variant->delete();
     return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
   }
 
