@@ -62,6 +62,11 @@ class Product extends Model
     return $this->hasMany(ProductVariant::class);
   }
 
+  public function vendor()
+  {
+    return $this->belongsTo(Vendor::class);
+  }
+
   protected static function booted()
   {
     static::deleting(

@@ -80,3 +80,4 @@ Route::delete('product_variant_items/{variantItemId}', [ProductVariantItemContro
  */
 
 Route::get('seller-products', [SellerProductController::class, 'index'])->name('seller-products.index');
+Route::get('seller-pending-products', [SellerProductController::class, 'pendingProducts'])->name('seller-pending-products.index');
