@@ -23,7 +23,42 @@ class VendorProductVariantItemDataTable extends DataTable
   public function dataTable(QueryBuilder $query): EloquentDataTable
   {
     return (new EloquentDataTable($query))
-      ->addColumn('action', 'vendorproductvariantitem.action')
+      ->addColumn('action', function ($query) {
+        $editBtn = '<a href="' . route('vendor.products-variant-item.edit', $query->id) . '" class="btn btn-primary mx-2">
+                        <i class="far fa-edit"></i> Edit
+                 </a>';
+        $deleteBtn = '<a href="' . route('vendor.products-variant-item.destroy', $query->id) . '" class="btn btn-danger delete-item">
+                        <i class="fas fa-trash"></i> Delete
+                 </a>';
+        return $editBtn . $deleteBtn;
+      })
+      ->addColumn('status', function ($query) {
+        if ($query->status == 1) {
+          $button = '
+              <div class="form-check form-switch">
+                <input class="form-check-input change-status" checked type="checkbox" data-id="' . $query->id . '" id="flexSwitchCheckDefault">
+              </div>
+           ';
+        } elseif ($query->status == 0) {
+          $button = '
+          <div class="form-check form-switch">
+            <input class="form-check-input change-status" type="checkbox" data-id="' . $query->id . '" id="flexSwitchCheckDefault" >
+          </div>
+       ';
+        }
+        return $button;
+      })
+      ->addColumn('is_default', function ($query) {
+        if ($query->is_default == 1) {
+          return "<span class='badge bg-success'>Default</span>";
+        } elseif ($query->is_default == 0) {
+          return "<span class='badge bg-danger'>Not Default</span>";
+        }
+      })
+      ->addColumn('variant_name', function ($query) {
+        return $query->productVariant->name;
+      })
+      ->rawColumns(['action', 'status', 'is_default'])
       ->setRowId('id');
   }
 
@@ -65,12 +100,13 @@ class VendorProductVariantItemDataTable extends DataTable
     return [
       Column::make('id'),
       Column::make('name'),
-      Column::make('created_at'),
-      Column::make('updated_at'),
+      Column::make('variant_name'),
+      Column::make('price'),
+      Column::make('status'),
+      Column::make('is_default'),
       Column::computed('action')
         ->exportable(false)
         ->printable(false)
-        ->width(60)
         ->addClass('text-center'),
     ];
   }

@@ -19,7 +19,7 @@
 
 
                             <div>
-                                <a href="{{ route('vendor.products-variant.index', ['product' => $product->id]) }}"
+                                <a href="{{ route('vendor.products-variant-item.index', ['productId' => $product->id, 'variantId' => $variant->id]) }}"
                                     class="btn btn-success">
                                     <i class="fas fa-arrow-left"></i>
                                     Back
@@ -33,6 +33,7 @@
 
                                 <form action="{{ route('vendor.products-variant-item.update') }}" method="POST">
                                     @csrf
+                                    @method('PUT')
 
                                     <input type="hidden" name="variant_id" value="{{ $variant->id }}">
 
